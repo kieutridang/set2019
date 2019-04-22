@@ -120,17 +120,17 @@ function saveTask() {
 
 function checkNode(node, liSave, checkValidateValue) {
     if (node.checked == true) {
-        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">'+checkValidateValue.trim() + '</label>' 
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">' + checkValidateValue.trim() + '</label>' 
     }
     else {
-        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">'+checkValidateValue.trim() + '</label>'     
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">' + checkValidateValue.trim() + '</label>'     
     }
 }
 
 function validateEdit() {
     var checkValidate = document.getElementById('header-taskname-edit')
     if (checkValidate.value.trim() == '') {
-        document.getElementById('valid-edit').style.display='block'
+        document.getElementById('valid-edit').style.display = 'block'
         document.getElementById('valid-edit').innerText = '*this field is madatory'
     }
 }
@@ -194,7 +194,7 @@ function disabledButton(event) {
 function checkSaveDisplay(checkParent, check) {
     var onsave = document.getElementById('header')
     if (onsave.style.display == 'none') {
-        document.getElementById('valid-edit').style.display='block'
+        document.getElementById('valid-edit').style.display = 'block'
         document.getElementById('valid-edit').innerText = 'Saving before changing'
         check.childNodes[0].checked = false
     }
@@ -301,10 +301,10 @@ function playOrPause() {
 }
 
 function checkFirstTime() {
-    if (firstTime)
-    {
+    if (firstTime) {
         video.volume = 0.0;
-        firstTime = false;   
+        firstTime = false;  
+        video.muted = true;
     }
 }
 
@@ -325,17 +325,28 @@ function timeChooser() {
     video.currentTime = chosenTime
 }
 
+
 function muteOrUnmute() {
-    if(video.volume == 0.0) {
+    if (video.volume == 0.0) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
         video.volume = 1.0;
+        video.muted = false
     }
     else {
         volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
         video.volume = 0.0;
+        video.muted = true
     }
 }
 function screenCustomize() {
     var fullscreen = video.webkitRequestFullscreen || video.mozRequestFullScreen || video.msRequestFullscreen;
     fullscreen.call(video);
 }
+video.addEventListener('volumechange',function(e){
+    if (this.muted) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+    }
+    else {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+    }
+}, false)
