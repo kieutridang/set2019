@@ -1,63 +1,3 @@
-//add
-var maxHeightBodyList = document.getElementById('body').style.maxHeight
-var toDoList = document.getElementById('to-do-list')
-var instructionVideo = document.getElementById('instruction-video')
-var statistic = document.getElementById('statistic')
-var footer = document.getElementById('footer')
-function myFunction(x) {
-    if (x.matches) { // If media query matches
-        var width = window.innerWidth - 20
-        var height = (window.innerHeight - 60)/3
-        toDoList.style.width = width.toString() + 'px'
-        toDoList.style.height = height.toString() + 'px'
-        toDoList.style.cssFloat = 'left'
-        toDoList.style.margin = '0px 0px 20px 0px'
-        instructionVideo.style.width = width.toString() + 'px'
-        instructionVideo.style.height = height.toString() + 'px'
-        instructionVideo.style.margin = '0px 0px 20px 0px'
-        instructionVideo.style.cssFloat = 'left'
-        statistic.style.width = width.toString() + 'px'
-        statistic.style.height = height.toString() + 'px'
-        statistic.style.margin = '0px'
-        statistic.style.cssFloat = 'left'
-        footer.style.bottom = '0px'
-        var maxHeight = height - 70
-        if ( maxHeight >= 15) {
-            document.getElementById('body').style.maxHeight = maxHeight.toString() + 'px'
-        }
-        else {
-            maxHeight = 15
-            document.getElementById('body').style.maxHeight = maxHeight.toString() + 'px'
-        }
-    } 
-    else {
-        var width = (window.innerWidth - 30) / 2
-        var height = (window.innerHeight - 20)
-        var heightRight = height / 2 - 10
-        toDoList.style.width = width.toString() + 'px'
-        toDoList.style.height = height.toString() + 'px'
-        toDoList.style.cssFloat = 'left'
-        toDoList.style.margin = '0px 5px 0px 0px'
-        instructionVideo.style.width = width.toString() + 'px'
-        instructionVideo.style.height = heightRight.toString() + 'px'
-        instructionVideo.style.cssFloat = 'right'
-        instructionVideo.style.margin = '0px 0px 10px 5px'
-        statistic.style.width = width.toString() + 'px'
-        statistic.style.height = heightRight.toString() + 'px'
-        statistic.style.cssFloat = 'right'
-        statistic.style.margin = '10px 0px 0px 5px'
-        footer.style.bottom = '70px'
-        var maxHeight = height - 100
-        document.getElementById('body').style.maxHeight = maxHeight.toString() + 'px'
-        
-
-    }
-  }
-  
-var x = window.matchMedia("(max-width: 768px)")
-myFunction(x) // Call listener function at run time
-x.addListener(myFunction)
-
 function add() {
     var check = document.getElementById('header-taskname')
     if (check.value.trim() != '') {
@@ -120,7 +60,7 @@ function checkDisplay(objectDisplay, item) {
     if (item.innerHTML == document.getElementById('task-list').childNodes[document.getElementById('save').value].innerHTML) {
         objectDisplay.style.display = 'block'
         document.getElementById('save-edit').style.display = 'none'
-        document.getElementById('header-taskname-edit').value=''
+        document.getElementById('header-taskname-edit').value = ''
     }
     else {
         item.innerHTML = item.innerHTML.replace('check','')
@@ -167,17 +107,17 @@ function saveTask() {
 
 function checkNode(node, liSave, checkValidateValue) {
     if (node.checked == true) {
-        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">'+checkValidateValue.trim() + '</label>' 
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">' + checkValidateValue.trim() + '</label>' 
     }
     else {
-        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">'+checkValidateValue.trim() + '</label>'     
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">' + checkValidateValue.trim() + '</label>'     
     }
 }
 
 function validateEdit() {
     var checkValidate = document.getElementById('header-taskname-edit')
     if (checkValidate.value.trim() == '') {
-        document.getElementById('valid-edit').style.display='block'
+        document.getElementById('valid-edit').style.display = 'block'
         document.getElementById('valid-edit').innerText = '*this field is madatory'
     }
 }
@@ -241,7 +181,7 @@ function disabledButton(event) {
 function checkSaveDisplay(checkParent, check) {
     var onsave = document.getElementById('header')
     if (onsave.style.display == 'none') {
-        document.getElementById('valid-edit').style.display='block'
+        document.getElementById('valid-edit').style.display = 'block'
         document.getElementById('valid-edit').innerText = 'Saving before changing'
         check.childNodes[0].checked = false
     }
@@ -327,28 +267,63 @@ function statisticCounter() {
 }
 
 // video
-let player, time_update_interval;
+var video = document.querySelector('.videoplayer')
+var progress = document.querySelector('.timeline-progress')
+var playOrPauseBtn = document.getElementById('play-pause')
+var volumeBtn = document.getElementById('mute-unmute')
+var timeline = document.getElementById('timeline')
+video.muted = true
 
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('video-container', {
-        videoId: 'KpzhO1EyA2U',
-        playerVars: {
-            autoplay: 1,
-            controls: 0,
-            mute:1
-        },
-        events: {
-            onReady: initialize
-        }
-    });
+
+function playOrPause() {
+    if(video.paused) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
+        video.play();
+    }
+    else {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+        video.pause();
+    }
 }
 
-function initialize() {
-    updateTimerDisplay();
-    updateProgressBar();
-    clearInterval(time_update_interval);
-    time_update_interval = setInterval(function () {
-        updateTimerDisplay();
-        updateProgressBar();
-    }, 1000)
+
+video.addEventListener('timeupdate', function() {
+    var timeposition = video.currentTime/video.duration;
+    progress.style.width = timeposition * 100 + "%";
+    if (video.ended) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+    }
+})
+
+video.addEventListener('click',function() {
+    playOrPause();
+})
+
+function timeChooser() {
+    var chosenTime = event.offsetX / timeline.offsetWidth * video.duration
+    video.currentTime = chosenTime
 }
+
+
+function muteOrUnmute() {
+    if (video.muted) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+        video.muted = false
+    }
+    else {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+        video.muted = true
+    }
+}
+function screenCustomize() {
+    var fullscreen = video.webkitRequestFullscreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+    fullscreen.call(video);
+}
+video.addEventListener('volumechange',function(e){
+    if (this.muted) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+    }
+    else {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+    }
+}, false)

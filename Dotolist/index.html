@@ -7,29 +7,33 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To Do List</title>
     <link href="./style.css" type="text/css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
     <!-- input video -->
     <div id='instruction-video'>
-        <div id="controls-video" class="overlay">
-            <button id="play-pause">Pause</button>
-            <input id="time-line" type="range" min="0" max="100" value="0" step="1">
-            <button id="mute-unmute">Mute</button>
-            <button id="fullscreen">[x]</button>
+        <div id='video-container'>
+            <video class="videoplayer" src="./instruction.mp4" autoplay muted></video>
+            <div id="control-container">
+                <button id="play-pause" onclick="playOrPause()"><i class="fas fa-pause"></i></button>
+                <div id="timeline" onclick="timeChooser(event)">
+                    <div class="timeline-progress"></div>
+                </div>
+                <button id="mute-unmute" onclick="muteOrUnmute()"><i class="fas fa-volume-mute"></i></button>
+                <button id="fullscreen" onclick="screenCustomize()"><i class="fas fa-expand"></i></button>   
+            </div>
         </div>
-        <div id="video-container"></div>
-        <script src="https://www.youtube.com/iframe_api"></script>
     </div>
     <div id="to-do-list">
         <div id="header">
             <input id='header-taskname' placeholder='Task name...' onfocus='deleteAttention()'required/>
             <button id="add" onclick="validate();add()">Add</button>
-            <div id="valid" style="color:red;"></div>
+            <div id="valid" style="color:#ff0000;"></div>
         </div>
         <div id="save-edit">
             <input id='header-taskname-edit' placeholder='Task name...' onfocus='deleteAttentionEdit()'required/>
             <button id="save" onclick="validateEdit();saveTask();">Edit</button>
-            <div id="valid-edit" style="color:red;"></div>
+            <div id="valid-edit" style="color:#ff0000;"></div>
         </div>
         <div id="body">
             <ul id="task-list"></ul>
