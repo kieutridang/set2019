@@ -66,7 +66,7 @@ function checkDisplay(objectDisplay, item) {
     if (item.innerHTML == document.getElementById('task-list').childNodes[document.getElementById('save').value].innerHTML) {
         objectDisplay.style.display = 'block'
         document.getElementById('save-edit').style.display = 'none'
-        document.getElementById('header-taskname-edit').value=''
+        document.getElementById('header-taskname-edit').value =''
     }
     else {
         item.innerHTML = item.innerHTML.replace('check','')
