@@ -300,8 +300,7 @@ function playOrPause() {
 function checkFirstTime() {
     if (firstTime)
     {
-        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
-        video.volume = 1.0;
+        video.volume = 0.0;
         firstTime = false;   
     }
 }
