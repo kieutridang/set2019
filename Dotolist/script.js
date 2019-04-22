@@ -314,3 +314,7 @@ function muteOrUnmute() {
         video.volume = 0.0;
     }
 }
+function screenCustomize() {
+    var fullscreen = video.webkitRequestFullscreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+    fullscreen.call(video);
+}
