@@ -285,15 +285,13 @@ var progress = document.querySelector('.timeline-progress')
 var playOrPauseBtn = document.getElementById('play-pause')
 var volumeBtn = document.getElementById('mute-unmute')
 var timeline = document.getElementById('timeline')
-video.mute = true
-video.paused = false
+video.muted = true
 
 
 function playOrPause() {
     if(video.paused) {
         playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
         video.play();
-        checkFirstTime();
     }
     else {
         playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
@@ -321,15 +319,13 @@ function timeChooser() {
 
 
 function muteOrUnmute() {
-    if (video.mute) {
+    if (video.muted) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
-        video.mute = false
-        video.volume = 1.0;
+        video.muted = false
     }
     else {
         volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
-        video.mute = true
-        video.volume = 0.0;
+        video.muted = true
     }
 }
 function screenCustomize() {
