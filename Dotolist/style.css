@@ -5,14 +5,15 @@
     -webkit-box-sizing: border-box;
 }
 html {
-    height:100%;
-    margin:0;
+    height: 100%;
+    margin: 0;
     padding: 0px;
 }
 body {
     width:100%;
     height: 100%;
     margin: 0;
+    overflow: hidden;
 }
 #to-do-list {
     display: block;
@@ -204,7 +205,6 @@ li:nth-child(even) {
 .show {
     display: block;
 }
-// scale
 #bot {
     width: 100%;
     height: 100%;
@@ -263,48 +263,58 @@ li:nth-child(even) {
 }
 
 /* video */ 
+#video {
+    width:100%;
+    height:100%;
+    position:relative;
+}
 #controls-video {
-    width: 550px;
+    width: 100%;
     display: inline-block;
     background-color: #333333;
     color: #CFCECF;
+    position:absolute;
+    top:0px;
+    z-index: 1;
   }
   
-  .overlay {
-    position: absolute;
+.overlay {
     opacity: 0;
     transition: .5s ease;
-  }
-  
-  #add-video:hover .overlay {
-    opacity: 1;
-  }
-  
-  #play-pause {
-    display: inline-block;
-    width: 8%;
-    margin: 5px;
-  }
-  
-  #time-line {
-    display: inline-block;
-    width: 68%;
-    margin: 5px 5px 5px 0px;
-  }
-  
-  #mute-unmute {
-    display: inline-block;
-    width: 8%;
-    margin: 5px 5px 5px 0px;
-  }
-  
-  #fullscreen {
-    display: inline-block;
-    width: 8%;
-    margin: 5px 5px 5px 0px;
-  }
-
-  #video-container {
+}
+#video-container {
+    z-index:0;
+    position:absolute;
+    top:0px;
     width: 100%;
     height: 100%;
-  }   
+}   
+#instruction-video:hover  .overlay{
+    opacity: 1;
+}
+  
+#play-pause {
+display: inline-block;
+width: 8%;
+padding: 5px;
+}
+
+#time-line {
+display: inline-block;
+width: 68%;
+padding: 5px 5px 5px 0px;
+}
+
+#mute-unmute {
+display: inline-block;
+width: 8%;
+padding: 5px 5px 5px 0px;
+}
+
+#fullscreen {
+display: inline-block;
+width: 8%;
+padding: 5px 5px 5px 0px;
+}
+
+ 
