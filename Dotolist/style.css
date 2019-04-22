@@ -264,6 +264,7 @@ li:nth-child(even) {
     position:absolute;
     top:0px;
     z-index: 1;
+    padding-bottom:5px;
   }
   
 .overlay {
@@ -283,7 +284,7 @@ li:nth-child(even) {
   
 #play-pause {
 display: inline-block;
-width: 8%;
+width: 12%;
 padding: 5px;
 }
 
@@ -352,18 +353,18 @@ padding: 5px;
 }
 #time-line {
 display: inline-block;
-width: 68%;
+width: 66%;
 padding: 5px 5px 5px 0px;
 }
 
 #mute-unmute {
 display: inline-block;
-width: 8%;
+width: 9%;
 padding: 5px 5px 5px 0px;
 }
 
 #fullscreen {
 display: inline-block;
-width: 8%;
+width: 9%;
 padding: 5px 5px 5px 0px;
 }
