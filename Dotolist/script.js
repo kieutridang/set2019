@@ -285,8 +285,9 @@ var progress = document.querySelector('.timeline-progress')
 var playOrPauseBtn = document.getElementById('play-pause')
 var volumeBtn = document.getElementById('mute-unmute')
 var timeline = document.getElementById('timeline')
-video.mute = 0
-var firstTime = true
+video.mute = true
+video.paused = false
+
 
 function playOrPause() {
     if(video.paused) {
@@ -300,13 +301,6 @@ function playOrPause() {
     }
 }
 
-function checkFirstTime() {
-    if (firstTime) {
-        video.volume = 0.0;
-        firstTime = false;  
-        video.muted = true;
-    }
-}
 
 video.addEventListener('timeupdate', function() {
     var timeposition = video.currentTime/video.duration;
@@ -327,15 +321,15 @@ function timeChooser() {
 
 
 function muteOrUnmute() {
-    if (video.volume == 0.0) {
+    if (video.mute) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+        video.mute = false
         video.volume = 1.0;
-        video.muted = false
     }
     else {
         volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+        video.mute = true
         video.volume = 0.0;
-        video.muted = true
     }
 }
 function screenCustomize() {
