@@ -229,7 +229,11 @@ li:nth-child(even) {
     #statistic {
         width: 100%;
         float: left;
+<<<<<<< ToDoList_Team1
         height:15%;
+=======
+        height: 20%;
+>>>>>>> update
         padding: 0px 10px 10px 10px;
     }
     #footer {
