@@ -1,3 +1,4 @@
+<<<<<<< ToDoList_Team1
 
 <<<<<<< ToDoList_Team1
 
@@ -8,6 +9,8 @@ x.addListener(myFunction)
 =======
 >>>>>>> update
 
+=======
+>>>>>>> update
 function add() {
     var check = document.getElementById('header-taskname')
     if (check.value.trim() != '') {
