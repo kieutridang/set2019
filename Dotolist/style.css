@@ -205,7 +205,10 @@ li:nth-child(even) {
 .show {
     display: block;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> scale
 #bot {
     width: 100%;
     height: 100%;
@@ -217,7 +220,7 @@ li:nth-child(even) {
     #to-do-list {
         width: 70%;
         float: left;
-        height:50%;
+        height:45%;
         padding: 0px 10px 20px 10px;
     }
     #instruction-video {
@@ -229,11 +232,15 @@ li:nth-child(even) {
     #statistic {
         width: 100%;
         float: left;
+<<<<<<< HEAD
 <<<<<<< ToDoList_Team1
         height:15%;
 =======
         height: 20%;
 >>>>>>> update
+=======
+        height: 20%;
+>>>>>>> scale
         padding: 0px 10px 10px 10px;
     }
     #footer {
@@ -306,6 +313,7 @@ li:nth-child(even) {
     cursor: pointer;
   }
   
+<<<<<<< HEAD
 <<<<<<< ToDoList_Team1
 #play-pause {
 display: inline-block;
@@ -394,6 +402,8 @@ width: 9%;
 padding: 5px 0px 5px 0px;
 }
 =======
+=======
+>>>>>>> scale
   #timeline:hover {
     height: 6px;
   }
@@ -408,5 +418,9 @@ padding: 5px 0px 5px 0px;
     width: 0%;
     background-color: rgba(255, 178, 107,0.7);
     border-radius: 3px;
+<<<<<<< HEAD
   }
 >>>>>>> update
+=======
+  }
+>>>>>>> scale

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< ToDoList_Team1
 
 <<<<<<< ToDoList_Team1
@@ -11,6 +12,8 @@ x.addListener(myFunction)
 
 =======
 >>>>>>> update
+=======
+>>>>>>> scale
 function add() {
     var check = document.getElementById('header-taskname')
     if (check.value.trim() != '') {
@@ -287,6 +290,7 @@ var volumeBtn = document.getElementById('mute-unmute')
 var timeline = document.getElementById('timeline')
 video.muted = true
 
+<<<<<<< HEAD
 
 function playOrPause() {
     if(video.paused) {
@@ -318,6 +322,39 @@ function timeChooser() {
 }
 
 
+=======
+
+function playOrPause() {
+    if(video.paused) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
+        video.play();
+    }
+    else {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+        video.pause();
+    }
+}
+
+
+video.addEventListener('timeupdate', function() {
+    var timeposition = video.currentTime/video.duration;
+    progress.style.width = timeposition * 100 + "%";
+    if (video.ended) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+    }
+})
+
+video.addEventListener('click',function() {
+    playOrPause();
+})
+
+function timeChooser() {
+    var chosenTime = event.offsetX / timeline.offsetWidth * video.duration
+    video.currentTime = chosenTime
+}
+
+
+>>>>>>> scale
 function muteOrUnmute() {
     if (video.muted) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
