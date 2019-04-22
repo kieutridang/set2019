@@ -1,5 +1,3 @@
-
-
 function add() {
     var check = document.getElementById('header-taskname')
     if (check.value.trim() != '') {
