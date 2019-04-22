@@ -13,15 +13,16 @@
 =======
     <!-- input video -->
     <div id='instruction-video'>
-        <div id='video'>
-        <div id="controls-video" class="overlay">
-            <button id="play-pause">Pause</button>
-            <input id="time-line" type="range" min="0" max="100" value="0" step="1">
-            <button id="mute-unmute">Mute</button>
-            <button id="fullscreen">[x]</button>
-        </div>
-        <div id="video-container">
-                <script src="https://www.youtube.com/iframe_api"></script>
+        <div id = 'video-container'>
+            <video class="videoplayer" src="./instruction.mp4" ></video>
+            <div id="control-container">
+                <button id="play-pause" onclick="playOrPause()"><i class="fas fa-play"></i></button>
+                <div id="timeline" onclick="timeChooser(event)">
+                    <div class="timeline-progress"></div>
+                </div>
+                <button id="mute-unmute" onclick="muteOrUnmute()"><i class="fas fa-volume-mute"></i></button>
+                <button id="fullscreen" onclick="screenCustomize()"><i class="fas fa-expand"></i></button>   
+            </div>
         </div>
     </div>
         
