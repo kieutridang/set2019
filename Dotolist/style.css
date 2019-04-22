@@ -10,9 +10,10 @@ html {
     padding: 0px;
 }
 body {
-    width: 100%;
-    height: 90%;
+    width:100%;
+    height: 100%;
     margin: 0;
+    overflow: hidden;
 }
 #to-do-list {
     display: block;
@@ -22,7 +23,7 @@ body {
     display: block;
 }
 #statistic{
-    display: block;
+    display:block;
 }
 #header {
     display: block;
@@ -147,7 +148,7 @@ li:nth-child(even) {
 }
 
 .dropdown-content a {
-    color: black;
+    color: #000000;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -191,7 +192,7 @@ li:nth-child(even) {
 }
   
 .dropdown-content a {
-    color: black;
+    color: #000000;
     padding: 3px;
     text-decoration: none;
     display: block;
@@ -204,156 +205,127 @@ li:nth-child(even) {
 .show {
     display: block;
 }
-
 #bot {
     width: 100%;
     height: 100%;
+}
+@media screen and (min-width: 768px) {
+    #body {
+        max-height: 53%;
+    }
+    #to-do-list {
+        width: 50%;
+        float: left;
+        height:100%;
+        padding: 10px 5px 10px 10px;
+    }
+    #instruction-video {
+        width: 50%;
+        float: right;
+        height:50%;
+        padding: 10px 10px 10px 5px;
+    }
+    #statistic {
+        width: 50%;
+        float: right;
+        height:50%;
+        padding: 10px 10px 10px 5px;
+    }
+    #footer {
+        bottom: 70px;
+    }
 }
 @media screen and (max-width: 768px) {
     #body {
         max-height: 45%;
     }
     #to-do-list {
-        width: 70%;
+        width: 100%;
         float: left;
-        height: 36%;
+        height:45%;
         padding: 0px 10px 20px 10px;
     }
     #instruction-video {
         width: 100%;
         float: left;
-        height: 30%;
+        height:35%;
         padding: 10px 10px 20px 10px;
     }
     #statistic {
         width: 100%;
         float: left;
-        height: 22%;
+        height: 20%;
         padding: 0px 10px 10px 10px;
     }
     #footer {
         bottom: 20px;
     }
-    #statistic-informat {
-        color: #3498DB;
-        border-style: inset;
-        width: 50%;
-        height: 20%;
-        top: 10%;
-        left: 5%;
-        position: relative;
-        padding: 10px;
-        background: rgb(255, 255, 255);
-        border-radius: 10px;
-        min-height: 80px
-    }
 }
 
-/* video */ 
-#controls-video {
-    width: 550px;
-    display: inline-block;
-    background-color: #333333;
-    color: #CFCECF;
+#video-container {
+    width: 100%;
+    height:100%;
+    position: relative;
   }
   
-  .overlay {
+  .videoplayer {
+    width: 100%;
+    height:100%;
     position: absolute;
-    opacity: 0;
-    transition: .5s ease;
+  } 
+  
+  #control-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    flex-wrap: wrap;
+    background-color: rgb(54, 52, 52,0.5);
+    display: none;
+    z-index: 1;
+  }
+  video {
+      object-fit: fill;
+  }
+  #instruction-video:hover #control-container {
+    display:flex;
   }
   
-  #add-video:hover .overlay {
-    opacity: 1;
-  }
-  
-  #play-pause {
+  #control-container button {
+    background: none;
+    border : 0;
+    outline: 0;
+    cursor: pointer;
+    color: #F1F1F1;
     display: inline-block;
+    text-align: center;
+    font-size: 12x;
     width: 8%;
-    margin: 5px;
+    -webkit-font-smoothing: antialiased;
+    padding: 5px;
   }
   
-  #time-line {
+  #timeline {
     display: inline-block;
-    width: 68%;
-    margin: 5px 5px 5px 0px;
+    margin: 10px 5px ;
+    width: 70%;
+    height: 5px;
+    background-color: rgb(2, 2, 2,0.7);
+    border-radius: 3px;
+    cursor: pointer;
   }
   
-  #mute-unmute {
-    display: inline-block;
-    width: 8%;
-    margin: 5px 5px 5px 0px;
+  #timeline:hover {
+    height: 6px;
   }
   
-  #fullscreen {
-    display: inline-block;
-    width: 8%;
-    margin: 5px 5px 5px 0px;
+  
+  #timeline:hover .timeline-progress {
+    height: 6px;
   }
-
- 
-
-@media screen and (min-width: 768px) {
-    #to-do-list {
-        display: block;
-        float: left;
-        position: relative;
-        height: 100%;
-        width: 50%;
-        margin: 10px;
-    }
-    #header-right {
-        display: block;
-        float: right ;
-        position: relative;
-        height: 100%;
-        width: 45%;
-        position: relative;
-        margin-top: 10px;
-        margin-right: 10px;
-        margin-bottom: 10px;
-    }
-    #instruction-video {
-        height: 50%;
-        position: relative;
-    }
-    #video-container {
-        width: 100%;
-        height: 100%;
-        float: right;
-        display: block;
-        position: relative;
-      }
-    #statistic {
-        height: 50%;
-        margin-top: 20px;
-        position: relative;
-    }
-    #body {
-        overflow: scroll;
-        height: 75%;
-        width: 100%;
-    }
-    #title {
-        color:#ff8080;
-        padding: 30%;
-        text-shadow: 0.1em 0.1em 0.2em #ff8080
-    }
-    #statistic-informat {
-        color: #3498DB;
-        border-style: inset;
-        width: 50%;
-        height: 65%;
-        top: 10%;
-        left: 20%;
-        position: absolute;
-        background: rgb(255, 255, 255);
-        border-radius: 10px;
-        min-height: 80px
-    }
-    #statistic-informat a {
-        font-size: 30px;
-        line-height: 40px
-    }
-}
-
+  
+  .timeline-progress {
+    height: 5px;
+    width: 0%;
+    background-color: rgba(255, 178, 107,0.7);
+    border-radius: 3px;
+  }

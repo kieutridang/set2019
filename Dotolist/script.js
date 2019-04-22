@@ -1,10 +1,3 @@
-
-
-  
-var x = window.matchMedia("(max-width: 768px)")
-myFunction(x) // Call listener function at run time
-x.addListener(myFunction)
-
 function add() {
     var check = document.getElementById('header-taskname')
     if (check.value.trim() != '') {
@@ -67,7 +60,7 @@ function checkDisplay(objectDisplay, item) {
     if (item.innerHTML == document.getElementById('task-list').childNodes[document.getElementById('save').value].innerHTML) {
         objectDisplay.style.display = 'block'
         document.getElementById('save-edit').style.display = 'none'
-        document.getElementById('header-taskname-edit').value=''
+        document.getElementById('header-taskname-edit').value = ''
     }
     else {
         item.innerHTML = item.innerHTML.replace('check','')
@@ -114,17 +107,17 @@ function saveTask() {
 
 function checkNode(node, liSave, checkValidateValue) {
     if (node.checked == true) {
-        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">'+checkValidateValue.trim() + '</label>' 
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">' + checkValidateValue.trim() + '</label>' 
     }
     else {
-        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">'+checkValidateValue.trim() + '</label>'     
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">' + checkValidateValue.trim() + '</label>'     
     }
 }
 
 function validateEdit() {
     var checkValidate = document.getElementById('header-taskname-edit')
     if (checkValidate.value.trim() == '') {
-        document.getElementById('valid-edit').style.display='block'
+        document.getElementById('valid-edit').style.display = 'block'
         document.getElementById('valid-edit').innerText = '*this field is madatory'
     }
 }
@@ -188,7 +181,7 @@ function disabledButton(event) {
 function checkSaveDisplay(checkParent, check) {
     var onsave = document.getElementById('header')
     if (onsave.style.display == 'none') {
-        document.getElementById('valid-edit').style.display='block'
+        document.getElementById('valid-edit').style.display = 'block'
         document.getElementById('valid-edit').innerText = 'Saving before changing'
         check.childNodes[0].checked = false
     }
@@ -274,28 +267,63 @@ function statisticCounter() {
 }
 
 // video
-let player, time_update_interval;
+var video = document.querySelector('.videoplayer')
+var progress = document.querySelector('.timeline-progress')
+var playOrPauseBtn = document.getElementById('play-pause')
+var volumeBtn = document.getElementById('mute-unmute')
+var timeline = document.getElementById('timeline')
+video.muted = true
 
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('video-container', {
-        videoId: 'KpzhO1EyA2U',
-        playerVars: {
-            autoplay: 1,
-            controls: 0,
-            mute:1
-        },
-        events: {
-            onReady: initialize
-        }
-    });
+
+function playOrPause() {
+    if(video.paused) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
+        video.play();
+    }
+    else {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+        video.pause();
+    }
 }
 
-function initialize() {
-    updateTimerDisplay();
-    updateProgressBar();
-    clearInterval(time_update_interval);
-    time_update_interval = setInterval(function () {
-        updateTimerDisplay();
-        updateProgressBar();
-    }, 1000)
+
+video.addEventListener('timeupdate', function() {
+    var timeposition = video.currentTime/video.duration;
+    progress.style.width = timeposition * 100 + "%";
+    if (video.ended) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+    }
+})
+
+video.addEventListener('click',function() {
+    playOrPause();
+})
+
+function timeChooser() {
+    var chosenTime = event.offsetX / timeline.offsetWidth * video.duration
+    video.currentTime = chosenTime
 }
+
+
+function muteOrUnmute() {
+    if (video.muted) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+        video.muted = false
+    }
+    else {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+        video.muted = true
+    }
+}
+function screenCustomize() {
+    var fullscreen = video.webkitRequestFullscreen || video.mozRequestFullScreen || video.msRequestFullscreen;
+    fullscreen.call(video);
+}
+video.addEventListener('volumechange',function(e){
+    if (this.muted) {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
+    }
+    else {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+    }
+}, false)
