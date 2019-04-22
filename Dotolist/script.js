@@ -1,8 +1,4 @@
 
-  
-var x = window.matchMedia("(max-width: 768px)")
-myFunction(x) // Call listener function at run time
-x.addListener(myFunction)
 
 function add() {
     var check = document.getElementById('header-taskname')
