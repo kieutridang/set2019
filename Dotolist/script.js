@@ -275,15 +275,26 @@ var playOrPauseBtn = document.getElementById('play-pause')
 var volumeBtn = document.getElementById('mute-unmute')
 var timeline = document.getElementById('timeline')
 video.mute = 0
+var firstTime = true
 
 function playOrPause() {
     if(video.paused) {
         playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
         video.play();
+        checkFirstTime();
     }
     else {
         playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
         video.pause();
+    }
+}
+
+function checkFirstTime() {
+    if (firstTime)
+    {
+        volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
+        video.volume = 1.0;
+        firstTime = false;   
     }
 }
 
