@@ -327,3 +327,11 @@ video.addEventListener('volumechange',function(e){
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
     }
 }, false)
+video.addEventListener('pause',function(e){
+    if (this.paused) {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'  
+    }
+    else {
+        playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'   
+    }
+}, false)
