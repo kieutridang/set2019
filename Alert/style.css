@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+}
+
+/* success */
+.success-button {
+    display: block;
+    position: absolute;
+    background: #41e920;
+    font-size: 20px;
+    color: white;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+#alert-success {
+    width: 500px;
+    overflow: hidden;
+    background: #4CAF50;
+    box-shadow: 0 0 20px #000000;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    padding: 10px;
+    text-align: center;
+    display: none;
+}
+
+#alert-success h1 {
+    color: #FFFFFF;
+}
+
+.close {
+    font-size: 20px;
+    color: #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #3498db;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.close-button {
+    float: right;
+}
+
+.close-button:hover {
+    color: #ffffff;
+}
+
+/* error */
+.error-button {
+    display: block;
+    position: absolute;
+    background: #e74c3c;
+    font-size: 20px;
+    color: white;
+    padding: 10px 30px;
+    cursor: pointer;
+    top: 6%;
+}
+
+#alert {
+    width: 500px;
+    overflow: hidden;
+    background: #F44336;
+    box-shadow: 0 0 20px #000000;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    padding: 10px;
+    text-align: center;
+    display: none;
+}
+
+#alert h1 {
+    color: #ffffff;
+}
+
+/* info */
+.info-button {
+    display: block;
+    position: absolute;
+    background: #5075db;
+    font-size: 20px;
+    color: white;
+    padding: 10px 30px;
+    cursor: pointer;
+    top: 12%
+}
+
+#alert-info {
+    width: 500px;
+    overflow: hidden;
+    background: #2196F3;
+    box-shadow: 0 0 20px #000000;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    padding: 10px;
+    text-align: center;
+    display: none;
+}
+
+#alert-info h1 {
+    color: #ffffff;
+}
+
+/* warn */
+.warn-button {
+    display: block;
+    position: absolute;
+    background: #e6da3a;
+    font-size: 20px;
+    color: white;
+    padding: 10px 30px;
+    cursor: pointer;
+    top: 18%;
+}
+
+#alert-warning {
+    width: 500px;
+    overflow: hidden;
+    background: #FF9800;
+    box-shadow: 0 0 20px #000000;
+    border-radius: 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 999;
+    padding: 10px;
+    text-align: center;
+    display: none;
+}
+
+#alert-warning h1 {
+    color: #ffffff;
+}
