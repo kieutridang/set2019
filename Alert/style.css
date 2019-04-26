@@ -1,16 +1,23 @@
-body {
-    margin: 0;
-    padding: 0;
+button {
+    position: relative;
+}
+
+
+
+#pop-up {
+    width: 100%;
     font-family: sans-serif;
+    position: fixed;
 }
 
 /* success */
 .alert-success {
     width: 20%;
-    background: #4bec45;
-    border-radius: px;
-    position: absolute;
+    height: 100px;
+    background: #4beb46b3;
+    border-radius: 4px;
     padding: 10px;
+    margin: 3px;
     text-align: center;
     display: block;
 }
@@ -24,6 +31,7 @@ body {
     background: none;
     border : 0;
     outline: 0;
+    top: 10px;
     font-size: 30px;
     color: #ffffff
 }
@@ -33,10 +41,11 @@ body {
 
 .alert-error {
     width: 20%;
-    background: #F44336;
-    border-radius: px;
-    position: absolute;
+    height: 100px;
+    background: #f44336b3;
+    border-radius: 4px;
     padding: 10px;
+    margin: 3px;
     text-align: center;
     display: block;
 }
@@ -50,6 +59,7 @@ body {
     background: none;
     border : 0;
     outline: 0;
+    top: 10px;
     font-size: 30px;
     color: #ffffff
 }
@@ -57,10 +67,11 @@ body {
 /* info */
 .alert-info {
     width: 20%;
-    background: #2196F3;
+    height: 100px;
+    background: #2196f3b3;
     border-radius: 4px;
-    position: absolute;
     padding: 10px;
+    margin: 3px;
     text-align: center;
     display: block;
 }
@@ -74,6 +85,7 @@ body {
     background: none;
     border : 0;
     outline: 0;
+    top: 10px;
     font-size: 30px;
     color: #ffffff
 }
@@ -81,10 +93,11 @@ body {
 /* warn */
 .alert-warning {
     width: 20%;
-    background: #FF9800;
+    height: 100px;
+    background: #ff9800b3;
     border-radius: 4px;
-    position: absolute;
     padding: 10px;
+    margin: 3px;
     text-align: center;
     display: block;
 }
@@ -98,6 +111,7 @@ body {
     background: none;
     border : 0;
     outline: 0;
+    top: 10px;
     font-size: 30px;
     color: #ffffff
 }
