@@ -53,6 +53,9 @@ body {
     display: block;
     margin-bottom: 5px;
 }
+#header-taskname {
+    width: 80%
+}
 #done-list {
     display: none;
 }
@@ -80,6 +83,8 @@ li {
     position: relative;
     top: 0px;
     padding: 2px;
+    animation-name: flash;
+    animation-duration: 2s;
 }
 .animation-li {
     animation-name: flash;
@@ -464,3 +469,29 @@ video {
        transform: translateY(-98%);
     }
 }
+  @keyframes flash {
+    from,
+    0%,
+    to {
+      opacity: 0;
+    }
+    75% {
+      opacity: 1;
+    }
+  }
+  @keyframes bounceOut {
+    20% {
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+  
+    50%,
+    55% {
+      opacity: 1;
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+  
+    to {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+  }
