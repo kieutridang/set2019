@@ -341,18 +341,18 @@ li:nth-child(even) {
   /* animation for video-chau */
   @keyframes controllerMoveDown {
     from {
-       transform: translateY(-100%)
+       transform: translateY(-100%);
     }
     to {
-       transform: translateY(0%)
+       transform: translateY(0%);
     }
 }
 
 @keyframes controllerMoveUp {
     from {
-       transform: translateY(0%)
+       transform: translateY(0%);
     }
     to {
-       transform: translateY(-98%)
+       transform: translateY(-98%);
     }
 }
