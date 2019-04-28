@@ -21,15 +21,16 @@ function validate() {
         document.getElementById('valid').innerText = '*this field is madatory'
     }
     else {
-        document.getElementById('valid').style.display = 'block'
+        document.getElementById('valid_2').style.display = 'block'
         document.getElementById('valid_2').innerText = '*Success'
     }
 }
 
 function deleteAttention() {
     var checkBorder = document.getElementById('header-taskname')
-    if (document.getElementById('valid').style.display == 'block') {
+    if (document.getElementById('valid').style.display == 'block'|| document.getElementById('valid_2').style.display == 'block') {
         document.getElementById('valid').style.display = 'none'
+        document.getElementById('valid_2').style.display = 'none'
         checkBorder.style.border = "default"
     }
 }

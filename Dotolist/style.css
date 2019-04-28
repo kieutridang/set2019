@@ -36,7 +36,8 @@ body {
     color: #F1F1F1;
 }
 #valid_2 {
-    
+    animation-name: flash;
+    animation-duration: 2s;
 }
 #body {
     display: block;
@@ -344,21 +345,5 @@ li:nth-child(even) {
     }
     75% {
       opacity: 1;
-    }
-  }
-  @keyframes bounceOut {
-    20% {
-      transform: scale3d(0.9, 0.9, 0.9);
-    }
-  
-    50%,
-    55% {
-      opacity: 1;
-      transform: scale3d(1.1, 1.1, 1.1);
-    }
-  
-    to {
-      opacity: 0;
-      transform: scale3d(0.3, 0.3, 0.3);
     }
   }
