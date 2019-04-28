@@ -61,9 +61,14 @@ function changeBackgroundColor(item, count) {
 }
 function validate() {
     var checkValidate = document.getElementById('header-taskname')
+    
     if (checkValidate.value.trim() == '') {
         document.getElementById('valid').style.display = 'block'
         document.getElementById('valid').innerText = '*this field is madatory'
+    }
+    else {
+        document.getElementById('valid').style.display = 'block'
+        document.getElementById('valid_2').innerText = '*Success'
     }
 }
 
