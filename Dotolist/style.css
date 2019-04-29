@@ -17,9 +17,11 @@ body {
 }
 #header-taskname {
     border: 1px solid #4b4c4f;
+    opacity: 1;
 }
 #header-taskname-edit {
     border: 1px solid #4b4c4f;
+    opacity: 1;
 }
 #to-do-list {
     display: block;
@@ -78,7 +80,31 @@ li {
     position: relative;
     top: 0px;
     padding: 2px;
-    opacity: 1;
+}
+.animation-li {
+    animation-name: flash;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes flash {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+.animation-input {
+    animation-name: flash-input;
+    animation-duration: 2s;
+}
+@keyframes flash-input {
+    from {
+      color: black;
+    }
+    to {
+      color: white;
+    }
 }
 .edit-button {
     margin-right: 5px;

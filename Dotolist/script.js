@@ -10,6 +10,8 @@ var countDone2
 var counting = 0
 var stringCheck = ''
 var counting2 = 0
+var initialUndone = 0
+var initialDone = 0
 var video = document.querySelector('.videoplayer')
 var progress = document.querySelector('.timeline-progress')
 var playOrPauseBtn = document.getElementById('play-pause')
@@ -18,6 +20,7 @@ var timeline = document.getElementById('timeline')
 video.muted = true
 
 function add() {
+
     var check = document.getElementById('header-taskname')
     if (check.value.trim() != '') {
         countTask++
@@ -29,8 +32,16 @@ function add() {
         item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
         item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
         changeBackgroundColorTask(item)
-        taskList.append(item)
-        document.getElementById('header-taskname').value = ''
+        check.setAttribute('class','animation-input')
+        setTimeout(function() {
+            taskList.append(item)
+            item.setAttribute('class','animation-li')
+            setTimeout(function() {
+                check.value = ''
+                check.removeAttribute('class')
+                item.removeAttribute('class')
+            }, 1000)
+        },1000)
         statisticCounter()
     }
 } 
@@ -82,6 +93,7 @@ function deleteItem(event) {
 }
 
 function deleteForever(event) {
+    
     var listTask = document.getElementById('task-list')
     var item = event.currentTarget.parentElement
     var headerDisplay = document.getElementById('header')
@@ -94,12 +106,11 @@ function deleteForever(event) {
     if (header.style.display == 'none') {
         checkDisplay(headerDisplay,item)
     }
-
+    countTask--
+    countUndone--
     item.innerHTML = item.innerHTML.replace('>check', '>')
     item.setAttribute('class','gradient-color')
     setTimeout(function () {
-        countTask--
-        countUndone--
         animationBottomToTop()
         setTimeout(function (){
             item.remove()
@@ -191,6 +202,8 @@ function checkDisplay(objectDisplay, item) {
         document.getElementById('header-taskname-edit').value = ''
     }
     else {
+        countTask--
+        countUndone--
         item.innerHTML = item.innerHTML.replace('check','')
         item.innerHTML += 'delete'
         var taskList = document.getElementById('task-list')
@@ -478,13 +491,36 @@ function setOrderListUndone(listTask, count) {
 function displayNone(item) {
     item.style.display = 'none'
 }
+function animateValue(id, start, end, duration, type) {
+    var obj = document.getElementById(id);
+    var range = end - start;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        obj.innerHTML = type + value + "%";
+        if (value == end) {
+            clearInterval(timer);
+        }
+    }
+    timer = setInterval(run, stepTime);
+    run();
+}
 function statisticCounter() {
-    var doneCounter = document.getElementById("done-list").childElementCount
-    var undoneCounter = document.getElementById("task-list").childElementCount
-    var doneView = document.getElementById("done-task-percentage")
-    var undoneView = document.getElementById("undone-task-percentage")
-    doneView.innerHTML = "Done: " + (doneCounter/(doneCounter+undoneCounter))*100 + "%"
-    undoneView.innerHTML = "Undone: " + (undoneCounter/(doneCounter+undoneCounter))*100 + "%"
+    var doneCounter = countDone
+    var undoneCounter = countUndone
+    alert(doneCounter)
+    alert(undoneCounter)
+    doneRatio = (doneCounter/(doneCounter+undoneCounter))*100
+    undoneRatio = (undoneCounter/(doneCounter+undoneCounter))*100
+    animateValue("done-task-percentage", initialDone, doneRatio, 500, "Done: ")
+    animateValue("undone-task-percentage", initialUndone, undoneRatio, 500, "Undone: ")
+    initialDone = doneRatio
+    initialUndone = undoneRatio
 }
 
 
