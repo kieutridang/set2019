@@ -16,10 +16,12 @@ body {
     overflow: hidden;
 }
 #header-taskname {
+    width: 80%;
     border: 1px solid #4b4c4f;
     opacity: 1;
 }
 #header-taskname-edit {
+    width: 80%;
     border: 1px solid #4b4c4f;
     opacity: 1;
 }
@@ -338,19 +340,19 @@ ul {
         max-height: 53%;
     }
     #to-do-list {
-        width: 70%;
+        width: 50%;
         float: left;
         height:100%;
         padding: 10px 5px 10px 10px;
     }
     #instruction-video {
-        width: 30%;
+        width: 50%;
         float: right;
-        height:30%;
+        height:50%;
         padding: 10px 10px 10px 5px;
     }
     #statistic {
-        width: 30%;
+        width: 50%;
         float: right;
         height:50%;
         padding: 10px 10px 10px 5px;
