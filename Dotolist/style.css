@@ -15,6 +15,14 @@ body {
     margin: 0;
     overflow: hidden;
 }
+#header-taskname {
+    border: 1px solid #4b4c4f;
+    opacity: 1;
+}
+#header-taskname-edit {
+    border: 1px solid #4b4c4f;
+    opacity: 1;
+}
 #to-do-list {
     display: block;
     position: relative;
@@ -46,7 +54,10 @@ body {
     margin-bottom: 5px;
 }
 #done-list {
-    display: block;
+    display: none;
+}
+#undone-list {
+    display: none;
 }
 label {
     display: inline-block;
@@ -65,7 +76,35 @@ input[type="checkbox"] ~ label {
     position: absolute;
 }
 li {
+    display: block;
+    position: relative;
+    top: 0px;
     padding: 2px;
+}
+.animation-li {
+    animation-name: flash;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes flash {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+.animation-input {
+    animation-name: flash-input;
+    animation-duration: 2s;
+}
+@keyframes flash-input {
+    from {
+      color: black;
+    }
+    to {
+      color: white;
+    }
 }
 .edit-button {
     margin-right: 5px;
@@ -81,6 +120,78 @@ li {
     overflow: hidden;
     background:  #ff8080;
 }
+@keyframes change-color {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@-moz-keyframes change-color {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes list-color {
+    from {top: 0px; }
+    to { top: -32px; }
+}
+@-moz-keyframes list-color {
+    from {top: 0px; }
+    to { top: -32px; }
+}
+@keyframes disable-color {
+    from {background: red; }
+    to { background: blue; }
+}
+@-moz-keyframes disable-color {
+    from {background: red; }
+    to { background: blue; }
+}
+.gradient1-color {
+    animation-name: disable-color;
+    animation-duration: 1s;
+    -moz-animation-name: disable-color;
+    -moz-animation-duration: 1s;
+}
+.gradient2-color {
+    animation-name: list-color;
+    animation-duration: 1s;
+    -moz-animation-name: list-color;
+    -moz-animation-duration: 1s;
+}
+.gradient-color{
+    animation-fill-mode: forwards;
+    animation-name: change-color;
+    animation-duration: 1s;
+    -moz-animation-name: change-color;
+    -moz-animation-duration: 1s;
+    -moz-animation-fill-mode: forwards;
+}
+
+
 .yes-button {
     margin-right: 5px;
     float: right;
@@ -97,26 +208,22 @@ li {
 }
 #save-edit {
     display: none;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
   
 /* li color by nth row*/
 ul {
+    display: block;
+    top:0px;
+    position: relative;
     padding: 0px;
     margin: 0px;
     width: 100%;
 }
-li:nth-child(odd) {
-    background: #d9d9d9;
-}
-
-li:nth-child(even) {
-    background: #F1F1F1;
-}
 .delete-button,.yes-button,.no-button,.edit-button {
     border-radius: 5px;
 }
-
+  
 
 /* Dropdown style */
 .drop-button {
@@ -171,16 +278,16 @@ li:nth-child(even) {
     margin: 0;
     cursor: pointer;
 }
-  
+
 .drop-button:hover, .drop-button:focus {
     background-color: #2980B9;
 }
-  
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -190,25 +297,26 @@ li:nth-child(even) {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-  
+
 .dropdown-content a {
     color: #000000;
     padding: 3px;
     text-decoration: none;
     display: block;
 }
-  
+
 .dropdown a:hover {
     background-color: #ddd;
 }
-  
+
 .show {
     display: block;
 }
 #bot {
     width: 100%;
-    height: 100%;
+    height: 100%;   
 }
+
 @media screen and (min-width: 768px) {
     #body {
         max-height: 53%;
@@ -235,6 +343,7 @@ li:nth-child(even) {
         bottom: 70px;
     }
 }
+
 @media screen and (max-width: 768px) {
     #body {
         max-height: 45%;
@@ -267,15 +376,15 @@ li:nth-child(even) {
     height:100%;
     position: relative;
     overflow: hidden;
-  }
+}
   
-  .videoplayer {
+.videoplayer {
     width: 100%;
     height:100%;
     position: absolute;
-  } 
+} 
   
-  #control-container {
+#control-container {
     position: absolute;
     top: 0;
     width: 100%;
@@ -284,18 +393,17 @@ li:nth-child(even) {
     z-index: 1;
     display: flex;
     animation: controllerMoveUp 0.7s forwards;
-  }
-  video {
+
+}
+
+video {
     object-fit: fill;
-  }
-
-  #instruction-video:hover #control-container {
+}
+#instruction-video:hover #control-container {
     animation: controllerMoveDown 0.7s forwards;
-  }
-
+}
   
-  
-  #control-container button {
+#control-container button {
     background: none;
     border : 0;
     outline: 0;
@@ -307,9 +415,9 @@ li:nth-child(even) {
     width: 8%;
     -webkit-font-smoothing: antialiased;
     padding: 5px;
-  }
+}
   
-  #timeline {
+#timeline {
     display: inline-block;
     margin: 10px 5px ;
     width: 70%;
@@ -317,22 +425,22 @@ li:nth-child(even) {
     background-color: rgb(2, 2, 2,0.7);
     border-radius: 3px;
     cursor: pointer;
-  }
+}
 
-  #mute-unmute {
+#mute-unmute {
     margin-left: 18px;
-  }
-
-  #timeline:hover {
+}
+  
+#timeline:hover {
     height: 6px;
-  }
+}
   
   
-  #timeline:hover .timeline-progress {
+#timeline:hover .timeline-progress {
     height: 6px;
-  }
+}
   
-  .timeline-progress {
+.timeline-progress {
     height: 5px;
     width: 0%;
     background-color: rgba(223, 90, 37, 0.7);
