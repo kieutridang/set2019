@@ -18,6 +18,7 @@ body {
 #header-taskname {
     border: 1px solid #4b4c4f;
     opacity: 1;
+    width: 80%;
 }
 #header-taskname-edit {
     border: 1px solid #4b4c4f;
