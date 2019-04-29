@@ -526,11 +526,14 @@ function statisticCounter() {
 function playOrPause() {
     if(video.paused) {
         playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
+        alert(playOrPauseBtn.innerHTML)
         video.play();
     }
     else {
         playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
+        alert(playOrPauseBtn.innerHTML)
         video.pause();
+
     }
 }
 
