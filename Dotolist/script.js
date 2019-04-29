@@ -117,6 +117,7 @@ function deleteForever(event) {
             recoverList(listTask)
         }, 1000)    
     }, 1000);  
+    statisticCounter()
 }
 function animationBottomToTop() {
     if (task == 1)
@@ -513,10 +514,8 @@ function animateValue(id, start, end, duration, type) {
 function statisticCounter() {
     var doneCounter = countDone
     var undoneCounter = countUndone
-    alert(doneCounter)
-    alert(undoneCounter)
-    doneRatio = (doneCounter/(doneCounter+undoneCounter))*100
-    undoneRatio = (undoneCounter/(doneCounter+undoneCounter))*100
+    doneRatio = Math.round((doneCounter/(doneCounter+undoneCounter))*100)
+    undoneRatio = Math.round((undoneCounter/(doneCounter+undoneCounter))*100)
     animateValue("done-task-percentage", initialDone, doneRatio, 500, "Done: ")
     animateValue("undone-task-percentage", initialUndone, undoneRatio, 500, "Undone: ")
     initialDone = doneRatio
