@@ -15,11 +15,19 @@ body {
     margin: 0;
     overflow: hidden;
 }
+#header-taskname {
+    border: 1px solid #4b4c4f;
+    opacity: 1;
+}
+#header-taskname-edit {
+    border: 1px solid #4b4c4f;
+    opacity: 1;
+}
 #to-do-list {
     display: block;
     position: relative;
 }
-#instruction-video{
+#instruction-video {
     display: block;
 }
 #statistic{
@@ -35,10 +43,7 @@ body {
     border-radius: 5px;
     color: #F1F1F1;
 }
-#valid_2 {
-    animation-name: flash;
-    animation-duration: 2s;
-}
+
 #body {
     display: block;
     margin-bottom: 10px;
@@ -48,11 +53,11 @@ body {
     display: block;
     margin-bottom: 5px;
 }
-#header-taskname {
-    width: 80%
-}
 #done-list {
-    display: block;
+    display: none;
+}
+#undone-list {
+    display: none;
 }
 label {
     display: inline-block;
@@ -71,9 +76,35 @@ input[type="checkbox"] ~ label {
     position: absolute;
 }
 li {
+    display: block;
+    position: relative;
+    top: 0px;
     padding: 2px;
+}
+.animation-li {
     animation-name: flash;
     animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes flash {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+.animation-input {
+    animation-name: flash-input;
+    animation-duration: 2s;
+}
+@keyframes flash-input {
+    from {
+      color: #000000;
+    }
+    to {
+      color: #ffffff;
+    }
 }
 .edit-button {
     margin-right: 5px;
@@ -89,6 +120,94 @@ li {
     overflow: hidden;
     background:  #ff8080;
 }
+@keyframes change-color {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@-moz-keyframes change-color {
+    0% {
+        opacity: 1;
+    }
+    25% {
+        opacity: 0.75;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes list-color {
+    from {
+        top: 0px; 
+    }
+    to { 
+        top: -32px; 
+    }
+}
+@-moz-keyframes list-color {
+    from {
+        top: 0px; 
+    }
+    to { 
+        top: -32px; 
+    }
+}
+@keyframes disable-color {
+    from {
+        background:#ffffff; 
+    }
+    to { 
+        background: #668cff; 
+    }
+}
+@-moz-keyframes disable-color {
+    from {
+        background:#ffffff ; 
+    }
+    to { 
+        background:#668cff; 
+    }
+}
+.gradient1-color {
+    animation-name: disable-color;
+    animation-duration: 1s;
+    -moz-animation-name: disable-color;
+    -moz-animation-duration: 1s;
+}
+.gradient2-color {
+    animation-name: list-color;
+    animation-duration: 1s;
+    -moz-animation-name: list-color;
+    -moz-animation-duration: 1s;
+}
+.gradient-color {
+    animation-fill-mode: forwards;
+    animation-name: change-color;
+    animation-duration: 1s;
+    -moz-animation-name: change-color;
+    -moz-animation-duration: 1s;
+    -moz-animation-fill-mode: forwards;
+}
+
+
 .yes-button {
     margin-right: 5px;
     float: right;
@@ -105,31 +224,27 @@ li {
 }
 #save-edit {
     display: none;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
   
 /* li color by nth row*/
 ul {
+    display: block;
+    top:0px;
+    position: relative;
     padding: 0px;
     margin: 0px;
     width: 100%;
 }
-li:nth-child(odd) {
-    background: #d9d9d9;
-}
-
-li:nth-child(even) {
-    background: #F1F1F1;
-}
 .delete-button,.yes-button,.no-button,.edit-button {
     border-radius: 5px;
 }
-
+  
 
 /* Dropdown style */
 .drop-button {
     background-color: #3498DB;
-    color: white;
+    color: 	#FFFFFF;
     padding: 2px;
     font-size: 16px;
     border: none;
@@ -172,23 +287,23 @@ li:nth-child(even) {
 
 .drop-button {
     background-color: #3498DB;
-    color: white;
+    color: 	#FFFFFF;
     padding: 3px;
     font-size: 16px;
     border: none;
     margin: 0;
     cursor: pointer;
 }
-  
+
 .drop-button:hover, .drop-button:focus {
     background-color: #2980B9;
 }
-  
+
 .dropdown {
     position: relative;
     display: inline-block;
 }
-  
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -198,43 +313,44 @@ li:nth-child(even) {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-  
+
 .dropdown-content a {
     color: #000000;
     padding: 3px;
     text-decoration: none;
     display: block;
 }
-  
+
 .dropdown a:hover {
     background-color: #ddd;
 }
-  
+
 .show {
     display: block;
 }
 #bot {
     width: 100%;
-    height: 100%;
+    height: 100%;   
 }
+
 @media screen and (min-width: 768px) {
     #body {
         max-height: 53%;
     }
     #to-do-list {
-        width: 50%;
+        width: 70%;
         float: left;
         height:100%;
         padding: 10px 5px 10px 10px;
     }
     #instruction-video {
-        width: 50%;
+        width: 30%;
         float: right;
-        height:50%;
+        height:30%;
         padding: 10px 10px 10px 5px;
     }
     #statistic {
-        width: 50%;
+        width: 30%;
         float: right;
         height:50%;
         padding: 10px 10px 10px 5px;
@@ -243,6 +359,7 @@ li:nth-child(even) {
         bottom: 70px;
     }
 }
+
 @media screen and (max-width: 768px) {
     #body {
         max-height: 45%;
@@ -269,36 +386,40 @@ li:nth-child(even) {
         bottom: 20px;
     }
 }
-
+/* video css */
 #video-container {
     width: 100%;
     height:100%;
     position: relative;
-  }
+    overflow: hidden;
+}
   
-  .videoplayer {
+.videoplayer {
     width: 100%;
     height:100%;
     position: absolute;
-  } 
+} 
   
-  #control-container {
+#control-container {
     position: absolute;
     top: 0;
     width: 100%;
     flex-wrap: wrap;
     background-color: rgb(54, 52, 52,0.5);
-    display: none;
     z-index: 1;
-  }
-  video {
-      object-fit: fill;
-  }
-  #instruction-video:hover #control-container {
-    display:flex;
-  }
+    display: flex;
+    animation: controllerMoveUp 0.7s forwards;
+
+}
+
+video {
+    object-fit: fill;
+}
+#instruction-video:hover #control-container {
+    animation: controllerMoveDown 0.7s forwards;
+}
   
-  #control-container button {
+#control-container button {
     background: none;
     border : 0;
     outline: 0;
@@ -310,9 +431,9 @@ li:nth-child(even) {
     width: 8%;
     -webkit-font-smoothing: antialiased;
     padding: 5px;
-  }
+}
   
-  #timeline {
+#timeline {
     display: inline-block;
     margin: 10px 5px ;
     width: 70%;
@@ -320,30 +441,234 @@ li:nth-child(even) {
     background-color: rgb(2, 2, 2,0.7);
     border-radius: 3px;
     cursor: pointer;
-  }
+}
+
+#mute-unmute {
+    margin-left: 18px;
+}
   
-  #timeline:hover {
+#timeline:hover {
     height: 6px;
-  }
+}
   
   
-  #timeline:hover .timeline-progress {
+#timeline:hover .timeline-progress {
     height: 6px;
-  }
+}
   
-  .timeline-progress {
+.timeline-progress {
     height: 5px;
     width: 0%;
-    background-color: rgba(255, 178, 107,0.7);
+    background-color: rgba(223, 90, 37, 0.7);
     border-radius: 3px;
   }
-  @keyframes flash {
-    from,
-    0%,
+  /* animation for video-chau */
+  @keyframes controllerMoveDown {
+    from {
+       transform: translateY(-100%);
+    }
     to {
-      opacity: 0;
+       transform: translateY(0%);
     }
-    75% {
-      opacity: 1;
+}
+
+@keyframes controllerMoveUp {
+    from {
+       transform: translateY(0%);
     }
-  }
+    to {
+       transform: translateY(-98%);
+    }
+}
+
+#pop-up {
+    width: 100%;
+    font-family: sans-serif;
+    position: fixed;
+    z-index: 1000;
+}
+
+/* success */
+.alert-success {
+    width: 20%;
+    height: 100px;
+    background: #4beb46;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 3px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    animation: popUp 1s forwards;    
+}
+
+.alert-success h3 {
+    color: #ffffff;
+    white-space: wrap;
+}
+
+.alert-success i {
+    position: relative;
+    background: none;
+    border : 0;
+    outline: 0;
+    top: 10px;
+    font-size: 30px;
+    color: #ffffff
+}
+
+
+/* error */
+
+.alert-error {
+    width: 20%;
+    height: 100px;
+    background: #f44336;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 3px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    animation: popUp 1s forwards;    
+}
+
+.alert-error h3 {
+    color: #ffffff;
+    white-space: wrap;
+}
+
+.alert-error i {
+    position: relative;
+    background: none;
+    border : 0;
+    outline: 0;
+    top: 10px;
+    font-size: 30px;
+    color: #ffffff
+}
+
+/* info */
+.alert-info {
+    width: 20%;
+    height: 100px;
+    background: #2196f3;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 3px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    animation: popUp 1s forwards;    
+    white-space: wrap;
+}
+
+.alert-info h3 {
+    color:#ffffff;
+}
+
+.alert-info i {
+    position: relative;
+    background: none;
+    border : 0;
+    outline: 0;
+    top: 10px;
+    font-size: 30px;
+    color: #ffffff
+}
+
+/* warn */
+.alert-warning {
+    width: 20%;
+    height: 100px;
+    background: #ff9800;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 3px;
+    text-align: center;
+    display: block;
+    position: absolute;
+    animation: popUp 1s forwards;    
+}
+
+.alert-warning h3 {
+    color: #ffffff;
+    white-space: wrap;
+}
+
+.alert-warning i {
+    position: relative;
+    background: none;
+    border : 0;
+    outline: 0;
+    top: 10px;
+    font-size: 30px;
+    color: #ffffff;
+}
+/* close button */
+#close-button {
+    position: absolute;
+    cursor: pointer;
+    color: #ffffff;
+    top: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12x;
+    width: 8%;
+    -webkit-font-smoothing: antialiased;
+    padding: 5px;
+}
+
+#close-button:hover {
+    color: #f0efeffb;
+}
+
+#alert {
+    width: 100%;
+    height: 100%;
+}
+/* animations */
+@keyframes popUp {
+    from {
+    opacity: 0;
+    transform: translate(0%,-10%);
+    }
+    to {
+    opacity: 1;
+    transform: translate(0%,0%);
+    }
+}
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(0%,10%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(0%,20%);
+    }
+}
+
+@keyframes moveUp {
+   from {
+       transform: translate(0%,80%)
+   }
+   to {
+       transform: translate(0%,0%)
+   }
+}
+
+@keyframes moveDown {
+    from {
+        transform: translate(0%,-80%)
+    }
+    to {
+        transform: translate(0%,0%)
+    }
+ }
+#valid {
+    color:#ff0000;
+}
+#valid-edit {
+    color:#ff0000;
+}
