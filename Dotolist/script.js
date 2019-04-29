@@ -526,17 +526,15 @@ var volumeBtn = document.getElementById('mute-unmute')
 var timeline = document.getElementById('timeline')
 video.muted = true
 
+
 function playOrPause() {
     if(video.paused) {
         playOrPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'
-        alert(playOrPauseBtn.innerHTML)
         video.play();
     }
     else {
         playOrPauseBtn.innerHTML = '<i class="fas fa-play"></i>'
-        alert(playOrPauseBtn.innerHTML)
         video.pause();
-
     }
 }
 
@@ -558,6 +556,7 @@ function timeChooser() {
     video.currentTime = chosenTime
 }
 
+
 function muteOrUnmute() {
     if (video.muted) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
@@ -568,12 +567,10 @@ function muteOrUnmute() {
         video.muted = true
     }
 }
-
 function screenCustomize() {
     var fullscreen = video.webkitRequestFullscreen || video.mozRequestFullScreen || video.msRequestFullscreen;
     fullscreen.call(video);
 }
-
 video.addEventListener('volumechange',function(e){
     if (this.muted) {
         volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>'
@@ -773,4 +770,3 @@ function disable(event) {
 }
 
 let alert = new Alert('bottom-right',5000,true,false)
-    
