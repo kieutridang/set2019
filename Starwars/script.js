@@ -19,7 +19,8 @@ function displayPeople(peopleData) {
   list.innerHTML=""
    for(let i = 0; i < peopleData.results.length; i++) {
       let detailsInfo = "'" + peopleData.results[i].url +"'"
-      list.innerHTML += '<button id="characters" onclick="detailsRequest('+ detailsInfo +')">'+ peopleData.results[i].name + '</button>' + '</br>'
+      list.innerHTML += '<i class="fas fa-chevron-circle-right"></i>'
+      list.innerHTML += '<button id="characters" onclick="detailsRequest('+ detailsInfo +',event)">'+ peopleData.results[i].name + '</button>' + '</br>'
       list.innerHTML +="<div id='details'></div>"
    }
    let nextPage = "'" + peopleData.next + "'"
@@ -67,7 +68,8 @@ function displayPagesData(data) {
   list.innerHTML=""
   for(let i = 0; i < data.results.length; i++) {
     let detailsInfo = "'" + data.results[i].url +"'"
-    list.innerHTML += '<button id="characters" onclick="detailsRequest('+ detailsInfo +')">'+ data.results[i].name + '</button>' + '</br>'
+    list.innerHTML += '<i class="fas fa-chevron-circle-right"></i>'
+    list.innerHTML += '<button id="characters" onclick="detailsRequest('+ detailsInfo +',event)">'+ data.results[i].name + '</button>' + '</br>'
     list.innerHTML +="<div id='details'></div>"
   }
   let nextPage = "'" + data.next + "'"
@@ -80,8 +82,29 @@ function displayPagesData(data) {
   }
 }
 
-function detailsRequest(url) {
+function detailsRequest(url, event) {
+    var show = event.currentTarget.previousElementSibling;    // right-icon 
+    var detail = event.currentTarget.nextElementSibling.nextElementSibling;   // div details
+    showAnimation(show, detail)   // rotate right-icon and show/hide div details
+}
 
+function showAnimation(show, detail) {
+  if (show.classList.length == 2) {    // click to show
+    show.classList.add('rotate')
+    detail.innerHTML += '<i class="fas fa-chevron-circle-right"></i>'
+    detail.innerHTML += '<button id="characters" onclick="detailsRequest('+ 1 +',event)">'+ 'nam' + '</button>' + '</br>'
+    detail.innerHTML += "<div id='details'></div>"
+    detail.style.display = 'block'
+  }
+  else {                               // click to hide
+    show.classList.remove('rotate')
+    show.classList.add('hide')
+    setTimeout(function (){
+      show.classList.remove('hide')
+      detail.innerHTML = ''
+      detail.style.display = 'none'
+    }, 250)  
+  } 
 }
 
   

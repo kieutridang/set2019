@@ -1,0 +1,36 @@
+@keyframes rotate-animation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(90deg);
+    }
+}
+@keyframes hide-animation {
+    from {
+        transform: rotate(90deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.hide {
+    animation-name: hide-animation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;   
+}
+.rotate {
+    animation-name: rotate-animation;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+li {
+    list-style-type: none;
+}
+.details {
+    display: none;
+    padding-left: 10px;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
