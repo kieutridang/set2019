@@ -16,7 +16,7 @@ function displayPeople(peopleData) {
   let list = document.getElementById("item-container")
   list.innerHTML = ""
   for(let i = 0; i < peopleData.results.length; i++) {
-    list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + peopleData.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i>'+ peopleData.results[i].name + '</button>'
+    list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + peopleData.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i> '+ peopleData.results[i].name + '</button>'
     list.innerHTML += "<div id='details'></div>"
   }
   if (peopleData.next !== null) {
@@ -69,7 +69,7 @@ function displayFilms(filmsData) {
   let list = document.getElementById("item-container")
   list.innerHTML=""
   for(let i = 0; i < filmsData.results.length; i++) {
-    list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + filmsData.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i>'+ filmsData.results[i].title + '</button>'
+    list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + filmsData.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i> '+ filmsData.results[i].title + '</button>'
     list.innerHTML += "<div id='details'></div>"
   }
   if (filmsData.next !== null) {
