@@ -258,7 +258,6 @@ function changeUrlIntoTitle(url, content, key) {
 
 function changeUrlsIntoNames(urls, event) {
   var URLs = urls.split(',')
-  var data = []
   var detailsContent =  event.currentTarget.nextElementSibling
   if (detailsContent.innerHTML !== "") {
     collapseAnimation (detailsContent)
@@ -270,27 +269,20 @@ function changeUrlsIntoNames(urls, event) {
     request.open('GET', URLs[i])
     request.send() 
     request.onload = function() {
-      data.push(JSON.parse(request.responseText))
-      if( i === URLs.length - 1 ) {
-        displayNames(data, detailsContent)
+      let data = JSON.parse(request.responseText)
+      detailsContent.innerHTML += "<p>" + data.name + "</p>"
+      if( i == URLs.length - 1) {
+        collapseAnimation(detailsContent)
       }
     }
     request.onerror = function() {
       alert('No internet connection')
     }
   }
-}
-
-function displayNames(data, detailsContent) {
-  for (let i = 0 ; i < data.length ; i++) {
-    detailsContent.innerHTML += "<p>" + data[i].name + "</p>"
-  }
-  collapseAnimation(detailsContent)
 }
 
 function changeUrlsIntoTitles(urls,event) {
   var URLs = urls.split(',')
-  var data = []
   var detailsContent =  event.currentTarget.nextElementSibling
   if (detailsContent.innerHTML !== "") {
     collapseAnimation (detailsContent)
@@ -302,22 +294,16 @@ function changeUrlsIntoTitles(urls,event) {
     request.open('GET', URLs[i])
     request.send() 
     request.onload = function() {
-      data.push(JSON.parse(request.responseText))
-      if( i === URLs.length - 1) {
-        displayTitles(data,detailsContent)
+      let data = JSON.parse(request.responseText)
+      detailsContent.innerHTML += "<p>" + data.title + "</p>"
+      if( i == URLs.length - 1) {
+        collapseAnimation(detailsContent)
       }
     }
     request.onerror = function() {
       alert('No internet connection')
     }
   }
-}
-
-function displayTitles(data, detailsContent) {
-  for (let i = 0 ; i < data.length ; i++) {
-    detailsContent.innerHTML += "<p>" + data[i].title + "</p>"
-  }
-  collapseAnimation(detailsContent)
 }
 
 function collapseAnimation (detailsContent) {

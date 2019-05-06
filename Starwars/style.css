@@ -1,6 +1,6 @@
 #collapsible {
   position: relative;
-  background-color: #ffffff;
+  background-color: #e6e3e3;
   color: #2a658d;
   cursor: pointer;
   padding: 18px;
@@ -15,10 +15,9 @@
 #staticstic {
   position: relative;
   background-color: #2a658d;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   padding: 18px;
-  width: 100%;
   border: none;
   text-align: center;
   outline: none;
@@ -27,7 +26,7 @@
 }
 
 #collapsible:hover {
-  background-color: #e4e4e4;
+  background-color: #f1f1f1;
 }
 
 i {
@@ -53,7 +52,7 @@ i {
   max-height: 0;
   overflow: auto;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+  background-color: #eeecec;
   margin: auto;
   width: 80%;
 }
@@ -85,7 +84,7 @@ i {
 
 #body {
   position: relative;
-  width:60%;
+  width: 60%;
   margin: auto;
   overflow: auto;
 }
@@ -94,7 +93,8 @@ i {
   width: 100%;
   margin: auto;
   overflow:auto;
-  max-height: 500px
+  max-height: 500px;
+  background-color: #f3f3f3;
 }
 
 body {
