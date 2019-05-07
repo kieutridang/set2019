@@ -10,8 +10,9 @@
   outline: none;
   font-size: 15px;
   font-family: sans-serif;
-  }
-  #statistic {
+}
+
+#statistic {
   position: relative;
   background-color: #2a658d;
   color: #ffffff;
@@ -22,25 +23,31 @@
   outline: none;
   font-size: 15px;
   font-family: sans-serif
-  }
-  #collapsible:hover {
+}
+
+#collapsible:hover {
   background-color: #f1f1f1;
-  }
-  i {
+}
+
+i {
   transform: rotate(0deg);
   transition: transform 0.2s ease-out
-  }
-  .active i {
+}
+
+.active i {
   transform: rotate(90deg);
   transition: transform 0.2s ease-out
-  }
-  .active {
+}
+
+.active {
   background-color: #616060;
-  }
-  #next-page:hover, #previous-page:hover {
+}
+
+#next-page:hover, #previous-page:hover {
   background-color: #53bb34;
-  }
-  #details {
+}
+
+#details {
   padding: 0 18px;
   max-height: 0;
   overflow: auto;
@@ -48,10 +55,11 @@
   background-color: #eeecec;
   margin: auto;
   width: 80%;
-  }
-  #next-page {
+}
+
+#next-page {
   background-color: #52c543;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   padding: 18px;
   width: 20%;
@@ -60,10 +68,11 @@
   outline: none;
   font-size: 15px;
   float: right;
-  }
-  #previous-page {
+}  
+
+#previous-page {
   background-color: #52c543;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   padding: 18px;
   width: 20%;
@@ -71,41 +80,48 @@
   text-align: center;
   outline: none;
   font-size: 15px;
-  }
-  #body {
+}
+
+#body {
   position: relative;
   width: 60%;
   margin: auto;
   overflow: auto;
-  }
-  #item-container {
+}
+
+#item-container {
   width: 100%;
   margin: auto;
   overflow:auto;
   max-height: 500px;
   background-color: #f3f3f3;
-  }
-  body {
+}
+
+body {
   font-family: sans-serif;
-  }
-  h1 {
+}
+
+h1 {
   position:relative;
   color: #2a658d;
   text-align: center;
   margin: 5px;
-  }
-  .dropbtn {
+}
+
+.dropbtn {
   background-color: #2a658d;
-  color: white;
+  color: #ffffff;
   padding: 16px;
   font-size: 16px;
   border: none;
-  }
-  .dropdown {
+}
+
+.dropdown {
   position: absolute;
   display: inline-block;
-  }
-  .dropdown-content {
+}
+
+.dropdown-content {
   display: none;
   position: absolute;
   background-color: #f7f7f7;
@@ -113,24 +129,28 @@
   box-shadow: 0px 8px 16px 0px #00000033;
   z-index: 1;
   max-width: 20%;
-  }
-  .dropdown-content button {
+}
+
+.dropdown-content button {
   color: #2a658d;
   padding: 12px 60px;
   display: block;
   border: none;
-  outline:0;
+  outline: 0;
   font-size: 16px;
   max-width: 100%;
   background-color: #f7f7f7;
-  }
-  .dropdown-content button:hover {
+}
+
+.dropdown-content button:hover {
   background-color: #ececec;
-  }
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown:hover .dropdown-content {
   display: block;
-  }
-  .dropdown:hover .dropbtn {
+}
+
+.dropdown:hover .dropbtn {
   background-color: #2e75a5;
-  }
+}
   
