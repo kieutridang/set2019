@@ -19,25 +19,25 @@ function display(url) {
   .then((data) => {
     list.innerHTML = ""
     for(let i = 0; i < data.results.length; i++) {
-    if(data.results[i].name === undefined) {
-    list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + data.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i> '+ data.results[i].title + '</button>'
-    list.innerHTML += "<div id='details'></div>"
-  }
-  else {
-  list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + data.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i> '+ data.results[i].name + '</button>'
-  list.innerHTML += "<div id='details'></div>"
-  }
+      if(data.results[i].name === undefined) {
+        list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + data.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i> '+ data.results[i].title + '</button>'
+        list.innerHTML += "<div id='details'></div>"
+      }
+      else {
+        list.innerHTML += '<button id="collapsible" onclick="detailsRequest('+ "'" + data.results[i].url +"'" +',event)"> <i class="fas fa-chevron-right"></i> '+ data.results[i].name + '</button>'
+        list.innerHTML += "<div id='details'></div>"
+      }
     }
     if (data.previous !== null) {
       list.innerHTML += '<button id="previous-page" onclick="display(' + "'" + data.previous + "'" +')">previous</button>'
     }
     if (data.next !== null) {
-    list.innerHTML += '<button id="next-page" onclick="display(' + "'" + data.next + "'" +')">Next</button>'
+      list.innerHTML += '<button id="next-page" onclick="display(' + "'" + data.next + "'" +')">Next</button>'
     }
     collapseAnimation (list)
   })
   .catch((data) => console.log(data))
-  }
+}
 
 function detailsRequest(url, event) {
   var detailsContent = event.currentTarget.nextElementSibling
