@@ -5,7 +5,7 @@ body {
     background: #34495e;
 }
 
-form {
+div {
     width: 300px;
     padding: 40px;
     position: absolute;
@@ -16,13 +16,13 @@ form {
     text-align: center;
 }
 
-form h1 {
+div h1 {
     color: white;
     text-transform: uppercase;
     font-weight: 500;
 }
 
-form input[type = "text"], form input[type = "password"] {
+div input[type = "text"], form input[type = "password"] {
     border: 0;
     background: none;
     display: block;
@@ -37,12 +37,12 @@ form input[type = "text"], form input[type = "password"] {
     transition: 0.25s;
 }
 
-form input[type = "text"]:focus, form input[type = "password"]:focus  {
+div input[type = "text"]:focus, form input[type = "password"]:focus  {
     width: 280px;
     border-color: #2ecc71;
 }
 
-form button {
+div button {
     border: 0;
     background: none;
     display: inline-block;
@@ -57,6 +57,6 @@ form button {
     cursor: pointer;
 }
 
-form button:hover {
+div button:hover {
     background: #2ecc71;
 }
