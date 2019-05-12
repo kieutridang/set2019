@@ -1,72 +1,27 @@
-var task = 1
-var done = 0
-var undone = 0
-var countTask = 0
-var countDone = 0
-var countUndone = 0
-var countTask2
-var countUndone2
-var countDone2
-var counting = 0
-var stringCheck = ''
-var counting2 = 0
-var initialUndone = 0
-var initialDone = 0
 
-function add() {
+var taskList = document.getElementById('task-list')
+var request = new XMLHttpRequest()
+request.open('GET','http://localhost:3000/api/taskList')
+request.send()
+request.onload = function() {
+    data = JSON.parse(request.responseText)
+    loadAvailableTasks(data)
+}
 
-    var check = document.getElementById('header-taskname')
-    if (check.value.trim() != '') {
-        countTask++
-        countUndone++
-        var taskList = document.getElementById('task-list')
-        var add = document.getElementById('header-taskname')
-        var item = document.createElement('li')
-        item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)"/>' + add.value.trim() + '</label>'
-        item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
-        item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
-        changeBackgroundColorTask(item)
-        check.value = ''
-        alert.popSuccess("Add successfully!!")
-        setTimeout(function() {
+function loadAvailableTasks(data) {
+    for( let i = 0 ; i < data.length ; i++) {
+        if(data[i].checked === false) {
+            var item = document.createElement('li')
+            item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)"/>' + data[i].taskName + '</label>'
+            item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
+            item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
             taskList.append(item)
-            statisticCounter()
-            item.setAttribute('class','animation-li')
-            setTimeout(function() {
-                check.removeAttribute('class')
-                item.removeAttribute('class')
-            }, 1000)
-        },1000)
-        
-    }
-} 
-function changeBackgroundColorTask(item) {
-    if (done == 1)
-        item.style.display = 'none'
-    if (undone == 1)
-        changeBackgroundColor(item, countUndone)
-    if (task == 1)
-        changeBackgroundColor(item, countTask)
-}
-function changeBackgroundColor(item, count) {
-    if ( count % 2 == 1)
-        item.style.backgroundColor = '#d9d9d9'
-    else
-        item.style.backgroundColor = '#F1F1F1'
-}
-function validate() {
-    var checkValidate = document.getElementById('header-taskname')
-    if (checkValidate.value.trim() == '') {
-        document.getElementById('valid').style.display = 'block'
-        alert.popWarning("Please input somthing")
-    }
-}
-
-function deleteAttention() {
-    var checkBorder = document.getElementById('header-taskname')
-    if (document.getElementById('valid').style.display == 'block') {
-        document.getElementById('valid').style.display = 'none'
-        checkBorder.style.border = "default"
+        }
+        else {
+            var item = document.createElement('li')
+            item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)" checked/><strike>'+ data[i].taskName  +'</strike></label>'
+            taskList.append(item)
+        }
     }
 }
 
@@ -90,67 +45,53 @@ function deleteFake(event) { // Nhấn nút delete No
     item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'    // Thêm nút Edit
 } 
 
-
-function deleteForever(event) { // Nhấn nút delete Yes
-    var listTask = document.getElementById('task-list')    // Lấy danh sách các task done và undone
-    var item = event.currentTarget.parentElement   // chỉ vào task muốn delete
-    var headerDisplay = document.getElementById('header')     // Thanh nhập task
-    item.innerHTML += 'check'     // Cộng string check vào phần muốn delete để tìm index của task muốn delete
-    var contentItem = item.innerHTML
-    counting = 0
-    while( contentItem != listTask.childNodes[counting].innerHTML )
-        counting++         // Tìm index của task muốn delete
-    countTask--           // SỐ lương task giảm
-    countUndone--         // Số lượng task undone giảm
-    item.innerHTML = item.innerHTML.replace('>check', '>')
-    item.setAttribute('class','gradient-color')    // Làm animation cho task delete mờ dần
-    setTimeout(function () {    // Sau 1s thì những task ở dưới move lên
-        animationBottomToTop()  // Move
-        setTimeout(function (){
-            item.remove()       // Xoá task
-            recoverList(listTask)  // Xoá class animation của những task move lên
-        }, 1000)    
-    }, 1000);  
-    alert.popSuccess("Delete successfully")
-    statisticCounter()
-}
-function animationBottomToTop() {   // Move up và đổi màu task
-    if (task == 1)                  // Nếu đang hiển thĩ hết task
-        changeColorTask()
-    if (undone == 1)               // Nếu đang hiển thị undone task
-        changeColorUndone()
+function deleteForever(event) {
+    let tasks = taskList.querySelectorAll('li')
+    let currentTask = event.currentTarget.parentElement
+    currentTask.innerHTML += '*'
+    for( let i = 0 ; i < tasks.length ; i++) {
+        if(tasks[i].innerHTML === currentTask.innerHTML) {
+            tasks[i].innerHTML = tasks[i].innerHTML.replace('*', '')
+            var currentIndex = i
+        }
+    }
+    listAnimation(currentIndex)
 }
 
-function recoverList(listTask) {   // Ngừng animation move up
-    var count = 0
-    for ( count; count< listTask.childElementCount; count++) {
-        listTask.childNodes[count].removeAttribute('class')   // Xoá class đầy lên
+function requestDelete (currentIndex) {
+    let reqDelete = new XMLHttpRequest()
+    reqDelete.open('POST','http://localhost:3000/delete') 
+    reqDelete.send(toString(currentIndex))
+    reqDelete.onload = function() {
+        listAnimation(currentIndex)
+    }
+    reqDelete.onerror = function() {
+        alert('No internet connection')
     }
 }
-function changeColorTask() {       // Chuyển màu + move up
-    var listTask = document.getElementById('task-list')
-    var count = 0
-    countTask2 = 0  // Biến dếm chẵn lẻ
-    for (count; count< listTask.childElementCount; count++) {
-        checkDifferentDelete(count, listTask)
-    }    
+
+function listAnimation(currentIndex) {
+    let tasks = taskList.querySelectorAll('li')
+    setTimeout(() => {
+        for( let i = 0 ; i < tasks.length ; i++) {
+            if( i > currentIndex ) {
+                tasks[i].className = 'movingUp'
+            }
+        }
+        for( let i = 0 ; i < tasks.length ; i++) {
+            if( i > currentIndex ) {
+                tasks[i].removeAttribute('class')
+            }
+        }
+    }, 1000);
+    setTimeout(() => {
+        tasks[currentIndex].remove()     
+    }, 1000);
+    setTimeout(() => {
+        tasks[currentIndex].className = 'fadeOut'          
+    }, 1000);
 }
-function checkDifferentDelete(count, item) {  // CHuyển màu +move up từng task
-    if (counting != count) {     // Xem có phải task đang bị delete ko, nếu ko =>
-        countTask2++            // Đếm chẵn lẻ
-        checkPosition(count, item, counting)    // Xem vị trí với task bị delete
-        changeBackgroundColor(item.childNodes[count], countTask2)  // Đổi màu task
-    }
-}
-function checkPosition(count, item, positionDelete) {
-    if (count > positionDelete)   // Nếu nằm sau => đẩy lên
-    {
-        animationDelete(item.childNodes[count])  // đẩy lên
-    }
-}
-function animationDelete(item) {
-    item.classList.add('gradient2-color')  // animation đẩy lên
-}
+// **********************************************************************************************************
 function changeColorUndone() {
     var listTask = document.getElementById('task-list')
     var count = 0
@@ -293,7 +234,6 @@ function disabledButton(event) {
     var check = event.currentTarget.parentElement
     var check3 = event.currentTarget.parentElement.parentElement
     var checkParent = check.parentElement
-    var listTask = document.getElementById('task-list')
     if (checkParent.innerHTML.includes('checked="true"') == true) {
         checkParent.innerHTML += 'check'
         stringCheck = checkParent.innerHTML
@@ -306,7 +246,6 @@ function disabledButton(event) {
         checkParent.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
         checkParent.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
         checkParent.childNodes[0].style.textDecoration = 'none'
-        animationDisable(checkParent, listTask, check3)
         statisticCounter()
     }
     else {
@@ -424,7 +363,6 @@ function allShow() {
     for (count; count < listTask.childElementCount; count++) {
         listTask.childNodes[count].style.display = 'block'
         listTask.childNodes[count].style.opacity = 1
-        changeBackgroundColor(listTask.childNodes[count], count+1)
     }
     buttonText[0].innerText = 'All'
 }
@@ -452,7 +390,6 @@ function setOrderListDone(listTask, count) {
     if (listTask.childNodes[count].childNodes[0].childNodes[0].checked == true ) {
         countDone2++
         listTask.childNodes[count].style.display = 'block' 
-        changeBackgroundColor(listTask.childNodes[count], countDone2)
     }
     else
         displayNone(listTask.childNodes[count])  
@@ -473,7 +410,6 @@ function setOrderListUndone(listTask, count) {
     if (listTask.childNodes[count].childNodes[0].childNodes[0].checked == false) {
         countUndone2++
         listTask.childNodes[count].style.display = 'block' 
-        changeBackgroundColor(listTask.childNodes[count], countUndone2)
     }
     else
         displayNone(listTask.childNodes[count])
