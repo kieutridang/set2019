@@ -14,6 +14,7 @@ body {
     height: 100%;
     margin: 0;
     overflow: hidden;
+    background-color:#192d5e 
 }
 #header-taskname {
     width: 80%;
@@ -41,9 +42,10 @@ body {
 }
 #add,#save {
     float: right;
-    background-color: #3498DB;
+    background-color: rgb(62, 137, 187);
     border-radius: 5px;
     color: #F1F1F1;
+    border: none
 }
 
 #body {
@@ -79,12 +81,11 @@ input[type="checkbox"] ~ label {
 }
 li {
     display: block;
+    color: #ffffff;
     position: relative;
     top: 0px;
     padding: 2px;
-    border-top :1px solid #dddddd;
-    overflow: auto;
-    max-height: 32px;
+    border-top :1px solid #22c8ce;
 }
 .animation-li {
     animation-name: flash;
@@ -116,25 +117,19 @@ li {
     float: right;
     height: 80%;
     overflow: hidden;
-    background: #4dffa6;
+    background: #62ff4d;
+    border: none;
 }
 .delete-button {
     margin-left: 5px;
     float: right;
     height: 80%;
     overflow: hidden;
-    background:  #ff8080;
+    background:  #e40a0a;
+    border: none;
 }
 
 @keyframes move-up {
-    from {
-        top: 0px; 
-    }
-    to { 
-        top: -32px; 
-    }
-}
-@-moz-keyframes move-up {
     from {
         top: 0px; 
     }
@@ -151,31 +146,13 @@ li {
         opacity: 0; 
     }
 }
-@-moz-keyframes fade-out {
-    from {
-        opacity: 1; 
-    }
-    to { 
-        opacity: 0; 
-    }
-}
 
 .fadeOut {
-    animation-name: fade-out;
-    animation-fill-mode: forwards;
-    animation-duration: 1s;
-    -moz-animation-name: fade-out;
-    -moz-animation-fill-mode: forwards;
-    -moz-animation-duration: 1s;
+    animation: fade-out 1s forwards;
 }
 
 .movingUp {
-    animation-name: move-up;
-    animation-fill-mode: forwards;
-    animation-duration: 1s;
-    -moz-animation-name: move-up;
-    -moz-animation-fill-mode: forwards;
-    -moz-animation-duration: 1s;
+    animation: move-up 1s forwards;
 }
 
 .yes-button {
@@ -183,14 +160,16 @@ li {
     float: right;
     height: 80%;
     overflow: hidden;
-    background: #ff8080;
+    background:  #e40a0a;
+    border: none;
 }
 .no-button {
     margin-left: 5px;
     float: right;
     height: 80%;
     overflow: hidden;
-    background: #4dffa6;
+    background: #62ff4d;
+    border: none;
 }
 #save-edit {
     display: none;
@@ -562,8 +541,8 @@ video {
     position: absolute;
     cursor: pointer;
     color: #ffffff;
-    top: 0;
-    right: 0;
+    top: 5px;
+    right: 5px;
     text-align: center;
     font-size: 12x;
     width: 8%;
