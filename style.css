@@ -82,6 +82,9 @@ li {
     position: relative;
     top: 0px;
     padding: 2px;
+    border-top :1px solid #dddddd;
+    overflow: auto;
+    max-height: 32px;
 }
 .animation-li {
     animation-name: flash;
@@ -122,41 +125,8 @@ li {
     overflow: hidden;
     background:  #ff8080;
 }
-@keyframes change-color {
-    0% {
-        opacity: 1;
-    }
-    25% {
-        opacity: 0.75;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    75% {
-        opacity: 0.25;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-@-moz-keyframes change-color {
-    0% {
-        opacity: 1;
-    }
-    25% {
-        opacity: 0.75;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    75% {
-        opacity: 0.25;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-@keyframes list-color {
+
+@keyframes move-up {
     from {
         top: 0px; 
     }
@@ -164,7 +134,7 @@ li {
         top: -32px; 
     }
 }
-@-moz-keyframes list-color {
+@-moz-keyframes move-up {
     from {
         top: 0px; 
     }
@@ -172,41 +142,40 @@ li {
         top: -32px; 
     }
 }
-@keyframes disable-color {
+
+@keyframes fade-out {
     from {
-        background:#ffffff; 
+        opacity: 1; 
     }
     to { 
-        background: #668cff; 
+        opacity: 0; 
     }
 }
-@-moz-keyframes disable-color {
+@-moz-keyframes fade-out {
     from {
-        background:#ffffff ; 
+        opacity: 1; 
     }
     to { 
-        background:#668cff; 
+        opacity: 0; 
     }
 }
-.gradient1-color {
-    animation-name: disable-color;
-    animation-duration: 1s;
-    -moz-animation-name: disable-color;
-    -moz-animation-duration: 1s;
-}
-.gradient2-color {
-    animation-name: list-color;
-    animation-duration: 1s;
-    -moz-animation-name: list-color;
-    -moz-animation-duration: 1s;
-}
-.gradient-color {
+
+.fadeOut {
+    animation-name: fade-out;
     animation-fill-mode: forwards;
-    animation-name: change-color;
     animation-duration: 1s;
-    -moz-animation-name: change-color;
-    -moz-animation-duration: 1s;
+    -moz-animation-name: fade-out;
     -moz-animation-fill-mode: forwards;
+    -moz-animation-duration: 1s;
+}
+
+.movingUp {
+    animation-name: move-up;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    -moz-animation-name: move-up;
+    -moz-animation-fill-mode: forwards;
+    -moz-animation-duration: 1s;
 }
 
 .yes-button {
