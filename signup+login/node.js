@@ -5,6 +5,8 @@ const port = 3000
 const hostname = '127.0.0.1'
 var check = 0
 var user = []
+var specialChar = '!"#$%&()*+,-./:;<=>?@[\]^_`{|}~'
+var singleChar = "'"
 
 function collectDataFromPost(request, callback) {
     let body = ''
@@ -135,69 +137,149 @@ server.listen(port, hostname, () => {
 })
 
 function checkRegister(email, password) {
-    if (checkLength(email, password) && checkNumbers(email, password) && checkUppers(email, password) && checkLowers(email, password) && checkSpaces(email, password))
-        return true
-    else
+    if (!checkLength(password)) {
         return false
-}
-function checkNumbers(email, password) {
-    if (checkNumber(email) && checkNumber(password))
-        return true
-    else
+    }
+    if (!checkLower(password)) {
         return false
-}
-function checkUppers(email, password) {
-    if (checkUpper(email) && checkUpper(password))
-        return true
-    else
+    }
+    if (!checkNumber(password)) {
         return false
-}
-function checkLowers(email, password) {
-    if (checkLower(email) && checkLower(password))
-        return true
-    else
+    }
+    if (!checkSpace(password)) {
         return false
-}
-function checkSpaces(email, password) {
-    if (checkSpace(email) && checkSpace(password))
-        return true
-    else
+    }
+    if (!checkUpper(password)) {
         return false
+    }
+    if (!checkSpecialChar(password)) {
+        return false
+    }
+    if (!checkEmail(email)) {
+        return false
+    }
+    return true
 }
 
-function checkLength(email, password) {
-    if (email.length >= 8 && password.length >= 8)
+function checkEmailForm (countAtMark, countPeriod, atMarkIndex, periodIndex, email) {
+    if (countAtMark != 1 || countPeriod != 1) {
+        return false
+    }
+    if (atMarkIndex == 0 || atMarkIndex == email.length - 1) {
+        return false
+    }
+    if (periodIndex == 0 || periodIndex == email.length - 1) {
+        return false
+    }
+    if (atMarkIndex > periodIndex) {
+        return false
+    }
+    if (atMarkIndex == periodIndex - 1) {
+        return false
+    }
+    return true
+}
+
+function checkEmail (email) {
+    var countAtMark = 0
+    var countPeriod = 0
+    var atMarkIndex = -1
+    var periodIndex = -1
+
+    for (var i = 0; i < email.length; i++) {
+        if (email[i] == '@') {
+            countAtMark = countAtMark + 1
+            atMarkIndex = i
+        }
+        if (email[i] == '.') {
+            countPeriod = countPeriod + 1
+            periodIndex = i
+        }
+    }
+
+    if (!checkEmailForm(countAtMark, countPeriod, atMarkIndex, periodIndex, email)) {
+        return false
+    }
+
+    for (var i = 0; i < atMarkIndex; i++) {
+        if (!isNumber(email[i]) && !isAlphabet(email[i])) {
+            return false
+        }
+    }
+
+    for (var i = atMarkIndex + 1; i < email.length; i++) {
+        if (i != periodIndex && !isAlphabet(email[i])) {
+            return false
+        }
+    }
+
+    return true
+}
+
+function isNumber (char) {
+    if (char.charCodeAt(0) >= 48 && char.charCodeAt(0) <= 57) {
+        return true
+    }    
+    return false
+}
+
+function isAlphabet (char) {
+    if (char.charCodeAt(0) >= 65 && char.charCodeAt(0) <= 90) {
+        return true
+    }
+    if (char.charCodeAt(0) >= 97 && char.charCodeAt(0) <= 122) {
+        return true
+    }
+    return false
+}
+
+function checkSpecialChar (password) {
+    for (var j = 0; j < password.length; j++) {
+        for (var i = 0; i < specialChar.length; i++) {
+            if (specialChar[i] == password[j]) {
+                return true
+            }
+        }
+        if (singleChar == password[j]) {
+            return true;
+        }
+    }
+    return false
+}
+
+function checkLength(password) {
+    if (password.length >= 8)
         return true
     else
         return false
 }
-function checkNumber(string) {
-    for ( var count = 0; count < string.length; count++) {
-        if (string[count].charCodeAt(0) >= 48 && string[count].charCodeAt(0)  <= 57) {
+function checkNumber(password) {
+    for ( var count = 0; count < password.length; count++) {
+        if (password[count].charCodeAt(0) >= 48 && password[count].charCodeAt(0)  <= 57) {
             return true
         }
     }
     return false
 }
-function checkUpper(string) {
-    for ( var count = 0; count < string.length; count++) {
-        if (string[count].charCodeAt(0)  >= 65 && string[count].charCodeAt(0)  <= 89) {
+function checkUpper(password) {
+    for ( var count = 0; count < password.length; count++) {
+        if (password[count].charCodeAt(0)  >= 65 && password[count].charCodeAt(0)  <= 90) {
             return true
         }
     }
     return false
 }
-function checkLower(string) {
-    for ( var count = 0; count < string.length; count++) {
-        if (string[count].charCodeAt(0)  >= 97 && string[count].charCodeAt(0)  <=  122) {
+function checkLower(password) {
+    for ( var count = 0; count < password.length; count++) {
+        if (password[count].charCodeAt(0)  >= 97 && password[count].charCodeAt(0)  <=  122) {
             return true
         }
     }
     return false
 }
-function checkSpace(string) {
-    for ( var count = 0; count < string.length; count++) {
-        if (string[count].charCodeAt(0)  == ' ') {
+function checkSpace(password) {
+    for ( var count = 0; count < password.length; count++) {
+        if (password[count].charCodeAt(0)  == ' ') {
             return false
         }
     }
