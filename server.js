@@ -90,17 +90,18 @@ http.createServer((req,res) => {
         res.writeHead(200,{'Content-Type':'text/plain'})
         res.end(JSON.stringify(undoneTasks))
     }
+    debugger
     if(req.url === '/getStatistic') {
         let number = 0
         req.on('data', result => {     
-          let checkTask = JSON.parse(result.toString())
+          let checkTaskbox = JSON.parse(result.toString())
           for(let i = 0 ; i < taskList.length; i++) {
-            if(i === checkTask[number]) {
+            if(i === checkTaskbox[number]) {
                 number++
-                checkTask.checked = true
+                checkTaskbox.checked = true
             }
             else {
-                checkTask.checked = false
+                checkTaskbox.checked = false
             }
           }
           res.writeHead(200,{'Content-Type':'text/plain'})

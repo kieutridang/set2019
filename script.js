@@ -29,6 +29,7 @@ function loadAvailableTasks(data) {
             taskList.append(item)
         }
     }
+    getStatistic()
 }
 
 function loadUndoneTasks(data) {
@@ -41,6 +42,7 @@ function loadUndoneTasks(data) {
             taskList.append(item)
         }
     }
+    getStatistic()
 }
 
 function loadDoneTasks(data) {
@@ -51,6 +53,7 @@ function loadDoneTasks(data) {
             taskList.append(item)
         }
     }
+    getStatistic()
 }
 
 function deleteItem(event) { 
@@ -98,6 +101,7 @@ function requestDelete (currentIndex) {
     reqDelete.onerror = function() {
         alert.popError('failed')
     }
+    getStatistic()
 }
 
 function deleteAnimation(currentIndex) {
@@ -164,15 +168,15 @@ function getStatistic(){
             } else {
                 undoneRate = undoneRate + 1
             }
-          }
+        }
         
           if (numberOfTasks != 0) {
             doneRate = doneRate / numberOfTasks
             undoneRate = undoneRate / numberOfTasks
-          }
+        }
         
-          done.innerText = 'Done: ' + doneRate * 100 + '%'
-          undone.innerText = 'Undone: ' + undoneRate * 100 + '%'
+        done.innerText = 'Done: ' + doneRate * 100 + '%'
+        undone.innerText = 'Undone: ' + undoneRate * 100 + '%'
     }
     requestCheck(checkedTasks)
 }
