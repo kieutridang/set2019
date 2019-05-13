@@ -76,13 +76,19 @@ function add() {
         item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)"/>' + currentValue + '</label>'
         item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
         item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
-        taskList.append(item)
-        alert.popSuccess('Add successfully!')
-        changeBackgroundColorTask(item)
         check.setAttribute('class','animation-input')
-        alert.popSuccess("Add successfully!!")
+        animationAdd(item)
     }
     requestAdd(currentValue)
+}
+
+function animationAdd(item) {
+    taskList.append(item)
+    item.className = 'fadeIn'
+    setTimeout(() => {
+        item.removeAttribute('class')
+    }, 1000);
+    
 }
 
 function requestAdd (currentValue) {

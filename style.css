@@ -81,7 +81,7 @@ input[type="checkbox"] ~ label {
 }
 li {
     display: block;
-    color: #ffffff;
+    color: #000000;
     position: relative;
     top: 0px;
     padding: 2px;
@@ -148,12 +148,26 @@ li {
     }
 }
 
+@keyframes fade-in {
+    from {
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+
 .fadeOut {
     animation: fade-out 1s forwards;
 }
 
 .movingUp {
     animation: move-up 1s forwards;
+}
+
+.fadeIn {
+   animation:  fade-in 1s forwards;
 }
 
 .yes-button {
