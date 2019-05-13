@@ -1,0 +1,73 @@
+function changeColorDone() {
+    var listTask = document.getElementById('task-list')
+    var count = 0
+    countDone2 = 0
+    for (count; count< listTask.childElementCount; count++) {
+        checkDifferentDeleteDone(count, listTask)
+    }
+}
+function checkDifferentDeleteDone(count, item) {
+    if (dem2 != count){
+        alert(dem2)
+        checkPosition(count, item)
+        checkDone(count, item)
+    }
+}
+function checkDone(count, item) {
+    if (item.childNodes[count].childNodes[0].childNodes[0].checked == true ) { 
+        countDone2++
+        changeBackgroundColor(item.childNodes[count], countDone2) 
+    }
+}
+
+
+
+
+
+@keyframes flash {
+    from,
+    0%,
+    to {
+      opacity: 0;
+    }
+    75% {
+      opacity: 1;
+    }
+}
+
+animation-name: flash;
+    animation-duration: 2s;
+var initialUndone = 0
+var initialDone = 0
+
+function animateValue(id, start, end, duration, type) {
+    var obj = document.getElementById(id);
+    var range = end - start;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        obj.innerHTML = type + value + "%";
+        if (value == end) {
+            clearInterval(timer);
+        }
+    }
+    timer = setInterval(run, stepTime);
+    run();
+}
+
+function statisticCounter() {
+    var doneCounter = document.getElementById("done-list").childElementCount
+    var undoneCounter = document.getElementById("task-list").childElementCount
+    doneRatio = (doneCounter/(doneCounter+undoneCounter))*100
+    undoneRatio = (undoneCounter/(doneCounter+undoneCounter))*100
+    animateValue("done-task-percentage", initialDone, doneRatio, 500, "Done: ")
+    animateValue("undone-task-percentage", initialUndone, undoneRatio, 500, "Undone: ")
+    initialDone = doneRatio
+    initialUndone = undoneRatio
+    
+}

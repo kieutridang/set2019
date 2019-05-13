@@ -3,13 +3,13 @@ var taskList = document.getElementById('task-list')
 var request = new XMLHttpRequest()
 var initialUndone = 0
 var initialDone = 0
+
 //khi mới load trang thì tạo request để load những task đã được lưu trên server
 request.open('GET','http://localhost:3000/api/taskList')
 request.send()
 request.onload = function() {
     data = JSON.parse(request.responseText)
     loadAvailableTasks(data)
-    
 }
 
 request.onerror = function() {
@@ -56,8 +56,55 @@ function loadDoneTasks(data) {
             taskList.append(item)
         }
     }
-    getStatistic()
 }
+
+function deleteAttention() {
+    var checkBorder = document.getElementById('header-taskname')
+    if (document.getElementById('valid').style.display == 'block') {
+        document.getElementById('valid').style.display = 'none'
+        checkBorder.style.border = "default"
+    }
+}
+
+function add() {
+    var check = document.getElementById('header-taskname')
+    if (check.value.trim() != '') {
+        var taskList = document.getElementById('task-list')
+        var add = document.getElementById('header-taskname')
+        var item = document.createElement('li')
+        var currentValue = add.value.trim()
+        item.innerHTML += '<label><input type="checkbox" onclick="disabledButton(event)"/>' + currentValue + '</label>'
+        item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
+        item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
+        taskList.append(item)
+        alert.popSuccess('Add successfully!')
+        changeBackgroundColorTask(item)
+        check.setAttribute('class','animation-input')
+        alert.popSuccess("Add successfully!!")
+    }
+    requestAdd(currentValue)
+}
+
+function requestAdd (currentValue) {
+    let reqAdd = new XMLHttpRequest()
+    reqAdd.open('POST','http://localhost:3000/add-task')
+    reqAdd.send(JSON.stringify(currentValue))
+    reqAdd.onload = function() {
+        alert.popSuccess('Add successfully!')
+    }
+    reqAdd.onerror = function() {
+        alert.popError('failed')
+    }
+}
+
+function validate() {
+    var checkValidate = document.getElementById('header-taskname')
+    if (checkValidate.value.trim() == '') {
+        document.getElementById('valid').style.display = 'block'
+        alert.popWarning("Please input somthing")
+    }
+}
+
 
 function deleteItem(event) { 
     var item = event.currentTarget.parentElement  
@@ -123,6 +170,7 @@ function deleteAnimation(currentIndex) {
             }
         }    
         getStatistic()
+
     }, 1000);
     setTimeout(() => {
         tasks[currentIndex].className = 'fadeOut'
@@ -154,6 +202,7 @@ function requestCheck(checkedTasks) {
         alert.popError('failed')
     }
 }
+
 function animateValue(id, start, end, duration, type) {
     var obj = document.getElementById(id);
     var range = end - start;
@@ -198,6 +247,7 @@ function getStatistic(){
     }
         // Thêm vào phần animation vào, có thể dùng cái cũ của Nguyên
 }
+
 
 function dropDown() {
     document.getElementById("dropdown-list").classList.toggle("show");
