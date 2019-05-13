@@ -87,6 +87,7 @@ li {
     padding: 2px;
     border-top :1px solid #22c8ce;
 }
+
 .animation-li {
     animation-name: flash;
     animation-duration: 2s;

@@ -46,6 +46,13 @@ function getResources(req,res) {
 
 http.createServer((req,res) => {
     getResources(req,res)
+    if(req.url === '/add-task') {
+        req.on('data', reqData => {
+            const newTask = { taskName: JSON.parse(reqData.toString()), checked: false }
+            taskList.push(newTask)
+            res.end(JSON.stringify(newTask))
+        })
+    }
     if(req.url === '/delete') {
       req.on('data', result => {     
         currentIndex = JSON.parse(result.toString())
@@ -56,6 +63,7 @@ http.createServer((req,res) => {
     if(req.url === '/checkTask') {
         let index = 0
         req.on('data', result => {     
+
           let checkedIndexes = JSON.parse(result.toString())
           for(let i = 0 ; i < taskList.length; i++) {
             if(i === checkedIndexes[index]) {
@@ -94,7 +102,6 @@ http.createServer((req,res) => {
         res.writeHead(200,{'Content-Type':'text/plain'})
         res.end(JSON.stringify(undoneTasks))
     }
-    
     if(req.url === '/getStatistic') {
         let number = 0
         req.on('data', result => {     
