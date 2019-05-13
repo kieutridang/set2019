@@ -148,6 +148,35 @@ function requestCheck(checkedTasks) {
     }
 }
 
+function getStatistic(){
+    let taskCheckBoxs = document.getElementsByClassName('task-list-checkbox')
+    let numberOfTasks = taskCheckBoxs.length
+    let done = document.getElementById('done')
+    let undone = document.getElementById('undone')
+    let doneRate = 0
+    let undoneRate = 0
+
+    for(var i = 0; i < numberOfTasks; i++){
+        {
+            let task = tasksCheckers[i]
+            if (task.checked) {
+                doneRate = doneRate + 1
+            } else {
+                undoneRate = undoneRate + 1
+            }
+          }
+        
+          if (numberOfTasks != 0) {
+            doneRate = doneRate / numberOfTasks
+            undoneRate = undoneRate / numberOfTasks
+          }
+        
+          done.innerText = 'Done: ' + doneRate * 100 + '%'
+          undone.innerText = 'Undone: ' + undoneRate * 100 + '%'
+    }
+    requestCheck(checkedTasks)
+}
+
 function dropDown() {
     document.getElementById("dropdown-list").classList.toggle("show");
 }

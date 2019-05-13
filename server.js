@@ -90,7 +90,23 @@ http.createServer((req,res) => {
         res.writeHead(200,{'Content-Type':'text/plain'})
         res.end(JSON.stringify(undoneTasks))
     }
-
+    if(req.url === '/getStatistic') {
+        let number = 0
+        req.on('data', result => {     
+          let checkTask = JSON.parse(result.toString())
+          for(let i = 0 ; i < taskList.length; i++) {
+            if(i === checkTask[number]) {
+                number++
+                checkTask.checked = true
+            }
+            else {
+                checkTask.checked = false
+            }
+          }
+          res.writeHead(200,{'Content-Type':'text/plain'})
+          res.end(JSON.stringify(getStatistic))
+        })
+    }
 }).listen(3000)
 
 console.log('Sever is now running on http://localhost:3000')
