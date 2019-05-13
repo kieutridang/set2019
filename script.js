@@ -7,6 +7,7 @@ request.send()
 request.onload = function() {
     data = JSON.parse(request.responseText)
     loadAvailableTasks(data)
+    
 }
 
 request.onerror = function() {
@@ -153,32 +154,32 @@ function requestCheck(checkedTasks) {
 }
 
 function getStatistic(){
-    let taskCheckBoxs = document.getElementsByClassName('task-list-checkbox')
-    let numberOfTasks = taskCheckBoxs.length
-    let done = document.getElementById('done')
-    let undone = document.getElementById('undone')
+    let numberOfTasks = taskList.childElementCount
+    let done = document.getElementById('done-task-percentage')
+    let undone = document.getElementById('undone-task-percentage')
     let doneRate = 0
     let undoneRate = 0
 
     for(var i = 0; i < numberOfTasks; i++){
         {
-            let task = tasksCheckers[i]
+            let task = taskList.childNodes[i].childNodes[0].childNodes[0] // Tasklist gồm nhiều list
+                                                                          // TaskList.childNodes[i] là list thứ i
+                                                                          // TaskList.childNodes[i].childNodes[0] là thằng label
+                                                                          // TaskList.childNodes[i].childNodes[0].childNodes[0] là thằng input, xem nó có check hay chưa
             if (task.checked) {
-                doneRate = doneRate + 1
+                doneRate++
             } else {
-                undoneRate = undoneRate + 1
+                undoneRate++
             }
-        }
-        
-          if (numberOfTasks != 0) {
+        }   
+    }
+        if (numberOfTasks != 0) {
             doneRate = doneRate / numberOfTasks
             undoneRate = undoneRate / numberOfTasks
         }
-        
+        // Thêm vào phần animation vào, có thể dùng cái cũ của Nguyên
         done.innerText = 'Done: ' + doneRate * 100 + '%'
         undone.innerText = 'Undone: ' + undoneRate * 100 + '%'
-    }
-    requestCheck(checkedTasks)
 }
 
 function dropDown() {

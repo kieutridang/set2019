@@ -18,6 +18,10 @@ var taskList = [
     {
         taskName : 'do sth 4',
         checked: true
+    },
+    {
+        taskName : 'do sth 5',
+        checked: true
     }
 ]
 
