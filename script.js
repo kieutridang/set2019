@@ -1,6 +1,8 @@
 currentPage = ''
 var taskList = document.getElementById('task-list')
 var request = new XMLHttpRequest()
+var initialUndone = 0
+var initialDone = 0
 //khi mới load trang thì tạo request để load những task đã được lưu trên server
 request.open('GET','http://localhost:3000/api/taskList')
 request.send()
@@ -102,7 +104,6 @@ function requestDelete (currentIndex) {
     reqDelete.onerror = function() {
         alert.popError('failed')
     }
-    getStatistic()
 }
 
 function deleteAnimation(currentIndex) {
@@ -121,6 +122,7 @@ function deleteAnimation(currentIndex) {
                 tasks[i].removeAttribute('class')
             }
         }    
+        getStatistic()
     }, 1000);
     setTimeout(() => {
         tasks[currentIndex].className = 'fadeOut'
@@ -152,20 +154,33 @@ function requestCheck(checkedTasks) {
         alert.popError('failed')
     }
 }
-
+function animateValue(id, start, end, duration, type) {
+    var obj = document.getElementById(id);
+    var range = end - start;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        obj.innerHTML = type + value + "%";
+        if (value == end) {
+            clearInterval(timer);
+        }
+    }
+    timer = setInterval(run, stepTime);
+    run();
+}
 function getStatistic(){
     let numberOfTasks = taskList.childElementCount
-    let done = document.getElementById('done-task-percentage')
-    let undone = document.getElementById('undone-task-percentage')
     let doneRate = 0
     let undoneRate = 0
 
     for(var i = 0; i < numberOfTasks; i++){
         {
-            let task = taskList.childNodes[i].childNodes[0].childNodes[0] // Tasklist gồm nhiều list
-                                                                          // TaskList.childNodes[i] là list thứ i
-                                                                          // TaskList.childNodes[i].childNodes[0] là thằng label
-                                                                          // TaskList.childNodes[i].childNodes[0].childNodes[0] là thằng input, xem nó có check hay chưa
+            let task = taskList.childNodes[i].childNodes[0].childNodes[0] 
             if (task.checked) {
                 doneRate++
             } else {
@@ -173,13 +188,15 @@ function getStatistic(){
             }
         }   
     }
-        if (numberOfTasks != 0) {
-            doneRate = doneRate / numberOfTasks
-            undoneRate = undoneRate / numberOfTasks
-        }
+    if (numberOfTasks != 0) {
+        doneRate = Math.round((doneRate/(numberOfTasks))*100)
+        undoneRate = Math.round((undoneRate/(numberOfTasks))*100)
+        animateValue("done-task-percentage", initialDone, doneRate, 500, "Done: ")
+        animateValue("undone-task-percentage", initialUndone, undoneRate, 500, "Undone: ")
+        initialDone = doneRate
+        initialUndone = undoneRate
+    }
         // Thêm vào phần animation vào, có thể dùng cái cũ của Nguyên
-        done.innerText = 'Done: ' + doneRate * 100 + '%'
-        undone.innerText = 'Undone: ' + undoneRate * 100 + '%'
 }
 
 function dropDown() {
