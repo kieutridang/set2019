@@ -1,6 +1,9 @@
 currentPage = ''
 var taskList = document.getElementById('task-list')
 var request = new XMLHttpRequest()
+var initialUndone = 0
+var initialDone = 0
+
 //khi mới load trang thì tạo request để load những task đã được lưu trên server
 request.open('GET','http://localhost:3000/api/taskList')
 request.send()
@@ -29,6 +32,7 @@ function loadAvailableTasks(data) {
             taskList.append(item)
         }
     }
+    getStatistic()
 }
 
 function loadUndoneTasks(data) {
@@ -41,6 +45,7 @@ function loadUndoneTasks(data) {
             taskList.append(item)
         }
     }
+    getStatistic()
 }
 
 function loadDoneTasks(data) {
@@ -100,13 +105,6 @@ function validate() {
     }
 }
 
-function deleteAttention() {
-    var checkBorder = document.getElementById('header-taskname')
-    if (document.getElementById('valid').style.display == 'block') {
-        document.getElementById('valid').style.display = 'none'
-        checkBorder.style.border = "default"
-    }
-}
 
 function deleteItem(event) { 
     var item = event.currentTarget.parentElement  
@@ -123,7 +121,7 @@ function deleteItem(event) {
 
 function deleteFake(event) { 
     var item = event.currentTarget.parentElement
-    event.currentTarget.remove()
+    event.currentTarget.remove()  
     item.innerHTML = item.innerHTML.replace('<button class="yes-button" onclick="deleteForever(event)">Yes</button>','') 
     item.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
     item.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'   
@@ -165,12 +163,14 @@ function deleteAnimation(currentIndex) {
         }
     }, 0);
     setTimeout(() => {
-        tasks[currentIndex].remove()
+        tasks[currentIndex].remove() 
         for( let i = 0 ; i < tasks.length ; i++) {
             if( i > currentIndex ) {
                 tasks[i].removeAttribute('class')
             }
-        }
+        }    
+        getStatistic()
+
     }, 1000);
     setTimeout(() => {
         tasks[currentIndex].className = 'fadeOut'
@@ -202,6 +202,52 @@ function requestCheck(checkedTasks) {
         alert.popError('failed')
     }
 }
+
+function animateValue(id, start, end, duration, type) {
+    var obj = document.getElementById(id);
+    var range = end - start;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var startTime = new Date().getTime();
+    var endTime = startTime + duration;
+    var timer;
+    function run() {
+        var now = new Date().getTime();
+        var remaining = Math.max((endTime - now) / duration, 0);
+        var value = Math.round(end - (remaining * range));
+        obj.innerHTML = type + value + "%";
+        if (value == end) {
+            clearInterval(timer);
+        }
+    }
+    timer = setInterval(run, stepTime);
+    run();
+}
+function getStatistic(){
+    let numberOfTasks = taskList.childElementCount
+    let doneRate = 0
+    let undoneRate = 0
+
+    for(var i = 0; i < numberOfTasks; i++){
+        {
+            let task = taskList.childNodes[i].childNodes[0].childNodes[0] 
+            if (task.checked) {
+                doneRate++
+            } else {
+                undoneRate++
+            }
+        }   
+    }
+    if (numberOfTasks != 0) {
+        doneRate = Math.round((doneRate/(numberOfTasks))*100)
+        undoneRate = Math.round((undoneRate/(numberOfTasks))*100)
+        animateValue("done-task-percentage", initialDone, doneRate, 500, "Done: ")
+        animateValue("undone-task-percentage", initialUndone, undoneRate, 500, "Undone: ")
+        initialDone = doneRate
+        initialUndone = undoneRate
+    }
+        // Thêm vào phần animation vào, có thể dùng cái cũ của Nguyên
+}
+
 
 function dropDown() {
     document.getElementById("dropdown-list").classList.toggle("show");

@@ -14,7 +14,7 @@ body {
     height: 100%;
     margin: 0;
     overflow: hidden;
-    background-color: #ffffff;
+    /* background-color:#192d5e  */
 }
 #header-taskname {
     width: 80%;
@@ -81,7 +81,7 @@ input[type="checkbox"] ~ label {
 }
 li {
     display: block;
-    color: #000000;
+    color: #ffffff;
     position: relative;
     top: 0px;
     padding: 2px;
