@@ -90,7 +90,7 @@ http.createServer((req,res) => {
         res.writeHead(200,{'Content-Type':'text/plain'})
         res.end(JSON.stringify(undoneTasks))
     }
-    debugger
+    
     if(req.url === '/getStatistic') {
         let number = 0
         req.on('data', result => {     
