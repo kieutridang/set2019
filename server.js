@@ -112,6 +112,28 @@ http.createServer((req,res) => {
           res.end(JSON.stringify(getStatistic))
         })
     }
+
+    if(req.url == '/todolistedit') {
+        getStream((data) => {
+            for(let i = 0; i < taskList.length; i++ ) {
+                if(taskList[i].taskName == data.originalName) {
+                    taskList[i].taskName = data.replaceName
+                    res.end('success')
+                }
+            }
+            res.end('task not found')
+        })
+    }
+
+    function getStream(callback) {
+        let data = ''
+        req.on('data', chunk => {
+            data += chunk.toString()
+        })
+        req.on('end', () => {
+            callback(JSON.parse(data))
+        })
+    }
 }).listen(3000)
 
 console.log('Sever is now running on http://localhost:3000')

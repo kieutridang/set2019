@@ -3,6 +3,7 @@ var taskList = document.getElementById('task-list')
 var request = new XMLHttpRequest()
 var initialUndone = 0
 var initialDone = 0
+var oldName
 //khi mới load trang thì tạo request để load những task đã được lưu trên server
 request.open('GET','http://localhost:3000/api/taskList')
 request.send()
@@ -248,6 +249,98 @@ function undoneShow() {
     }
 }
 
+function editTaskName(event) {
+    if (document.getElementById('header').style.display == 'none') {
+        alert.popWarning("Please edit before change")
+    }
+    else {
+        var item = event.currentTarget.parentElement
+        var transit = document.getElementById('header-taskname-edit')
+        var saveIndex = document.getElementById('save')
+        transit.value = item.childNodes[0].innerText
+        oldName = transit.value
+        var item2 = event.currentTarget
+        item2.innerHTML += 'hello'
+        document.getElementById('header').style.display = 'none'
+        document.getElementById('save-edit').style.display = 'block'
+        item2.innerHTML = item2.innerHTML.replace('hello', '')
+        saveIndex.value = findIndex(item)
+    }
+}
+
+function findIndex(item) {
+    var taskList = document.getElementById('task-list') 
+    var i = 0
+    while (taskList.childNodes[i].innerHTML != item.innerHTML) {
+        i++
+    }
+    return i
+}
+
+function saveTask() {
+    var checkValidate = document.getElementById('header-taskname-edit')
+    if (checkValidate.value.trim() != '') {
+        var saveIndex = document.getElementById('save')
+        var taskList = document.getElementById('task-list')
+        var liSave = taskList.childNodes[saveIndex.value]
+        var nodeFirst = liSave.childNodes[0]     
+        var nodeSecond = nodeFirst.childNodes[0]
+        checkNode(nodeSecond, liSave, checkValidate.value)
+        liSave.innerHTML += '<button class="delete-button" onclick="deleteItem(event)">Delete</button>'
+        liSave.innerHTML += '<button class="edit-button" onclick="editTaskName(event)">Edit</button>'
+        document.getElementById('header').style.display = 'block'
+        document.getElementById('save-edit').style.display = 'none'
+        document.getElementById('valid-edit').style.display = 'none'
+
+        var request = new XMLHttpRequest()
+        var data = {
+            originalName : oldName,
+            replaceName  : checkValidate.value
+        }
+        request.onreadystatechange = function() {
+            if (this.readyState == 4) {
+                alert.popSuccess("Edit successfully!!")
+                console.log(this.response)
+            }
+        }
+        
+        request.open('POST','http://localhost:3000/todolistedit')  
+        request.send(JSON.stringify(data))
+    }
+}
+
+function checkNode(node, liSave, checkValidateValue) {
+    if (node.checked == true) {
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)" checked="true">' + checkValidateValue.trim() + '</label>' 
+    }
+    else {
+        liSave.innerHTML  = '<label><input type="checkbox" onclick="disabledButton(event)">' + checkValidateValue.trim() + '</label>'     
+    }
+}
+
+function deleteAttentionEdit() {
+    var checkBorder = document.getElementById('header-taskname-edit')
+    if (document.getElementById('valid-edit').style.display == 'block') {
+        document.getElementById('valid-edit').style.display = 'none'
+        checkBorder.style.border = "default"
+    }
+}
+
+function deleteAttention() {
+    var checkBorder = document.getElementById('header-taskname')
+    if (document.getElementById('valid').style.display == 'block') {
+        document.getElementById('valid').style.display = 'none'
+        checkBorder.style.border = "default"
+    }
+}
+
+function validateEdit() {
+    var checkValidate = document.getElementById('header-taskname-edit')
+    if (checkValidate.value.trim() == '') {
+        document.getElementById('valid-edit').style.display = 'block'
+        alert.popWarning("Please input somthing")
+    }
+}
 
 // **********************************************************************************************************
 //alert class
